@@ -2,13 +2,13 @@ package Game;
 
 import java.util.*;
 
-
 public class StartGame {
     private boolean gameOver = false;
     private int player1Mancala = 0;
     private int player2Mancala = 0;
     private int player1Pits[];
     private int player2Pits[];
+    int zeroArray[]= new int[6];
     Scanner in = new Scanner(System.in);
 
     public void StartGame() {
@@ -17,18 +17,20 @@ public class StartGame {
         while (!this.gameOver) {
             this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala);
             printBoard();
-            int sum = Arrays.stream(this.player1Pits).sum() + Arrays.stream(this.player2Pits).sum() + this.player1Mancala + this.player2Mancala;
-            System.out.println("\nthe sum is " + sum + "\n");
             checkIfGameOver();
             if (!this.gameOver) {
                 this.player2Mancala = makeMove(this.player2Pits, this.player1Pits, this.player2Mancala);
                 printBoard();
-                sum = Arrays.stream(this.player1Pits).sum() + Arrays.stream(this.player2Pits).sum() + this.player1Mancala + this.player2Mancala;
-                System.out.println("\nthe sum is " + sum + "\n");
                 checkIfGameOver();
             }
         }
-    }
+        System.out.println("\n");
+        printBoard();
+        if(this.player1Mancala > this.player2Mancala)
+            System.out.println("\n player 1 won the game \n");
+        else
+            System.out.println("\n player 2 won the game \n");
+    } //ready for use
 
     public void initialBoard() { // initial the Mancala board
         this.player1Pits = new int[6];
@@ -39,7 +41,7 @@ public class StartGame {
         }
         player1Mancala = 0;
         player2Mancala = 0;
-    } //done
+    } //ready for use
 
     public void printBoard() {
         System.out.print(player2Mancala);
@@ -52,7 +54,7 @@ public class StartGame {
         System.out.println(']');
         System.out.print(Arrays.toString(this.player1Pits));
         System.out.println(player1Mancala);
-    } //done
+    } //ready for use
 
     public int makeMove(int firstArray[], int secondArray[], int mancala) {
         int j, pit, stones;
@@ -76,12 +78,12 @@ public class StartGame {
                 j++;
                 stones--;
             }
-            if (j - 1 == 6) {
+            if (j - 1 == 6 && !this.gameOver) {
                 printBoard();
                 mancala = makeMove(firstArray, secondArray, mancala);
-            }
-            else if ((j-1) <= 6 && firstArray[j - 1] - 1 == 0) {
-                firstArray[j - 1] += secondArray[5 - (j - 1)];
+            } else if ((j - 1) <= 6 && firstArray[j - 1] - 1 == 0) {
+                mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
+                firstArray[j - 1] = 0;
                 secondArray[5 - (j - 1)] = 0;
             }
         } else {
@@ -89,9 +91,25 @@ public class StartGame {
             mancala = makeMove(firstArray, secondArray, mancala);
         }
         return mancala;
-    }
+    } //ready for use
 
     public void checkIfGameOver() {
-
-    }
+        boolean player1BoardEmpty = true, player2BoardEmpty = true;
+        for (int i = 0; i < this.player1Pits.length; i++) {
+            if (this.player1Pits[i] != 0)
+                player1BoardEmpty = false;
+            if (this.player2Pits[i] != 0)
+                player2BoardEmpty = false;
+        }
+        if (player1BoardEmpty) {
+            this.gameOver = true;
+            this.player2Mancala += Arrays.stream(this.player2Pits).sum();
+            this.player2Pits = zeroArray;
+        }
+        if (player2BoardEmpty) {
+            this.gameOver = true;
+            this.player2Mancala += Arrays.stream(this.player2Pits).sum();
+            this.player1Pits = zeroArray;
+        }
+    } // ready for use
 }
