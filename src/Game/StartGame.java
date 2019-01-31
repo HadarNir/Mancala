@@ -14,6 +14,7 @@ public class StartGame {
     public void StartGame() {
         initialBoard();
         printBoard();
+        GameBoard gui = new GameBoard();
         while (!this.gameOver) {
             this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala);
             printBoard();
