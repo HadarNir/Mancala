@@ -4,12 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameBoard {
-    public static final int DEFAULT_WIDTH = 800;
+    public static final int DEFAULT_WIDTH = 1200;
     public static final int DEFAULT_HEIGHT = 600;
     public static final int MANCALA_WIDTH = 100;
     public static final int MANCALA_HEIGHT = 400;
-    public static final int PIT_WIDTH = 60;
-    public static final int PIT_HEIGHT = 145;
+    public static final int PIT_SIZE = 120;
 
     public GameBoard() {
         JFrame frame = new JFrame();

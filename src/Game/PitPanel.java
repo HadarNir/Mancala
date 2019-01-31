@@ -25,10 +25,8 @@ public class PitPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.blue);
-        g2.draw(new RoundRectangle2D.Double(5, 5, GameBoard.PIT_WIDTH, GameBoard.PIT_HEIGHT, 30, 30));
+        g2.draw(new RoundRectangle2D.Double(5, 5, GameBoard.PIT_SIZE, GameBoard.PIT_SIZE, 150, 150));
         g2.setColor(Color.black);
-
-
     }
 
     public void mouseClicked(MouseEvent arg0) {
