@@ -4,17 +4,17 @@ import java.util.*;
 
 public class StartGame {
     private boolean gameOver = false;
-    private int player1Mancala = 0;
-    private int player2Mancala = 0;
+    private int player1Mancala;
+    private int player2Mancala;
     private int player1Pits[];
     private int player2Pits[];
-    int zeroArray[]= new int[6];
+    private int zeroArray[];
+    private GameBoard gui;
     Scanner in = new Scanner(System.in);
 
     public void StartGame() {
         initialBoard();
         printBoard();
-        GameBoard gui = new GameBoard();
         while (!this.gameOver) {
             this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala);
             printBoard();
@@ -34,6 +34,8 @@ public class StartGame {
     } //ready for use
 
     public void initialBoard() { // initial the Mancala board
+        gui = new GameBoard();
+        zeroArray = new int[6];
         this.player1Pits = new int[6];
         this.player2Pits = new int[6];
         for (int i = 0; i < this.player2Pits.length; i++) {
