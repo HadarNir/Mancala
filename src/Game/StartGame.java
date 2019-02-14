@@ -31,7 +31,13 @@ public class StartGame {
         }
         System.out.println("\n");
         printBoard();
-        if(this.player1Mancala > this.player2Mancala)
+        for (int i = 0; i < a.length; i++) {
+            a[i].setStoneAmount(0);
+            b[i].setStoneAmount(0);
+        }
+        gui.SetStonesAmountInMancalaAPanel(this.player1Mancala);
+        gui.SetStonesAmountInMancalaBPanel(this.player2Mancala);
+        if (this.player1Mancala > this.player2Mancala)
             System.out.println("\n player 1 won the game \n");
         else
             System.out.println("\n player 2 won the game \n");
@@ -80,27 +86,26 @@ public class StartGame {
                 if (j < 6) {
                     firstArray[j]++;
                     a[j].setStoneAmount(firstArray[j]);
-                }
-                else if (j == 6)
+                } else if (j == 6)
                     mancala++;
                 else if (j < 13) {
                     secondArray[j - 7]++;
                     b[j - 7].setStoneAmount(secondArray[j - 7]);
-                }
-                else {
+                } else {
                     j = 0;
                     continue;
                 }
                 j++;
                 stones--;
             }
+            checkIfGameOver();
             if (j - 1 == 6 && !this.gameOver) {
                 printBoard();
                 mancala = makeMove(firstArray, secondArray, mancala, a, b);
-            } else if ((j - 1) <= 6 && firstArray[j - 1] - 1 == 0) {
+            } else if ((j - 1) < 6 && firstArray[j - 1] - 1 == 0) {
                 mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
                 firstArray[j - 1] = 0;
-                a[j-1].setStoneAmount(0);
+                a[j - 1].setStoneAmount(0);
                 secondArray[5 - (j - 1)] = 0;
                 b[5 - (j - 1)].setStoneAmount(0);
             }
