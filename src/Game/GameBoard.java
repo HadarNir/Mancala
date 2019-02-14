@@ -9,21 +9,25 @@ public class GameBoard {
     public static final int MANCALA_WIDTH = 100;
     public static final int MANCALA_HEIGHT = 400;
     public static final int PIT_SIZE = 120;
+    private MancalaPanel mancalaA;
+    private PitPanel[] a;
+    private MancalaPanel mancalaB;
+    private PitPanel[] b;
 
     public GameBoard() {
         JFrame frame = new JFrame();
         JPanel top = new JPanel();
         //Initializing PitPanels and MancalaPanels and attaching it to the model
-        MancalaPanel mancalaA = new MancalaPanel('a');
-        PitPanel[] a = new PitPanel[6];
+        mancalaA = new MancalaPanel('1');
+        a = new PitPanel[6];
         for (int i = 0; i < 6; i++) {
-            a[i] = new PitPanel('a', i);
+            a[i] = new PitPanel('1', i);
         }
 
-        MancalaPanel mancalaB = new MancalaPanel('b');
-        PitPanel[] b = new PitPanel[6];
+        mancalaB = new MancalaPanel('2');
+        b = new PitPanel[6];
         for (int i = 0; i < 6; i++) {
-            b[i] = new PitPanel('b', i);
+            b[i] = new PitPanel('2', i);
         }
 
         //Group the PitPanels together to form two rows
@@ -55,4 +59,21 @@ public class GameBoard {
         frame.setResizable(false);
         frame.setVisible(true);
     }
+
+    public PitPanel[] getA() {
+        return this.a;
+    }
+
+    public PitPanel[] getB() {
+        return this.b;
+    }
+
+    public void SetStonesAmountInMancalaAPanel(int stones){
+        this.mancalaA.setStoneAmount(stones);
+    }
+
+    public void SetStonesAmountInMancalaBPanel(int stones){
+        this.mancalaB.setStoneAmount(stones);
+    }
+
 }
