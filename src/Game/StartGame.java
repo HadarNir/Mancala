@@ -12,7 +12,7 @@ public class StartGame {
     private GameBoard gui;
     Scanner in = new Scanner(System.in);
 
-    public void StartGame() {
+    public StartGame() {
         initialBoard();
         printBoard();
         PitPanel[] a = gui.getA();
@@ -131,7 +131,7 @@ public class StartGame {
         }
         if (player2BoardEmpty) {
             this.gameOver = true;
-            this.player2Mancala += Arrays.stream(this.player2Pits).sum();
+            this.player1Mancala += Arrays.stream(this.player1Pits).sum();
             this.player1Pits = zeroArray;
         }
     } // ready for use
