@@ -12,7 +12,7 @@ public class StartGame {
     private GameBoard gui;
     Scanner in = new Scanner(System.in);
 
-    public void StartGame() {
+    public StartGame() {
         initialBoard();
         printBoard();
         PitPanel[] a = gui.getA();
