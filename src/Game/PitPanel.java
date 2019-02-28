@@ -37,27 +37,4 @@ public class PitPanel extends JPanel {
         this.stoneAmount = stoneAmount;
         this.repaint();
     }
-
-    public void mouseClicked(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-    }
-
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
-
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
-
-    /**
-     * Controller to do a turn when clicking on pit.
-     */
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
 }
