@@ -131,7 +131,7 @@ public class StartGame {
         }
         if (player2BoardEmpty) {
             this.gameOver = true;
-            this.player2Mancala += Arrays.stream(this.player2Pits).sum();
+            this.player1Mancala += Arrays.stream(this.player1Pits).sum();
             this.player1Pits = zeroArray;
         }
     } // ready for use
