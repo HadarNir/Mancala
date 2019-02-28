@@ -29,10 +29,6 @@ public class PitPanel extends JPanel {
         g2.drawString(this.stoneAmount + "  pit " + (pitNumber + 1), 10, GameBoard.PIT_SIZE + 20);
     }
 
-    public int getStoneAmount() {
-        return stoneAmount;
-    }
-
     public void setStoneAmount(int stoneAmount) {
         this.stoneAmount = stoneAmount;
         this.repaint();
