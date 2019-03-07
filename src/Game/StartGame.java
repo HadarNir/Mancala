@@ -9,6 +9,9 @@ public class StartGame {
     private int player1Pits[];
     private int player2Pits[];
     private int zeroArray[];
+    private GameBoard board;
+    private PitPanel pitPanelArrPlayer1[];
+    private PitPanel pitPanelArrPlayer2[];
 
     Scanner in = new Scanner(System.in);
 
@@ -18,14 +21,17 @@ public class StartGame {
         while (!this.gameOver) {
             this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala);
             printBoard();
+            updateBoard();
             checkIfGameOver();
             if (!this.gameOver) {
                 this.player2Mancala = makeMove(this.player2Pits, this.player1Pits, this.player2Mancala);
                 printBoard();
+                updateBoard();
                 checkIfGameOver();
             }
         }
         System.out.println("\n");
+        updateBoard();
         printBoard();
 
 
@@ -36,15 +42,19 @@ public class StartGame {
     } //ready for use
 
     public void initialBoard() { // initial the Mancala board
-        zeroArray = new int[6];
+        this.board = new GameBoard();
+        this.pitPanelArrPlayer1 = board.getA();
+        this.pitPanelArrPlayer2 = board.getB();
+        this.zeroArray = new int[6];
         this.player1Pits = new int[6];
         this.player2Pits = new int[6];
         for (int i = 0; i < this.player2Pits.length; i++) {
             this.player1Pits[i] = 5;
             this.player2Pits[i] = 5;
         }
-        player1Mancala = 0;
-        player2Mancala = 0;
+        this.player1Mancala = 0;
+        this.player2Mancala = 0;
+        updateBoard();
     } //ready for use
 
     public void printBoard() {
@@ -117,4 +127,13 @@ public class StartGame {
             this.player1Pits = zeroArray;
         }
     } // ready for use
+
+    public void updateBoard(){
+        for(int i=0; i< this.player1Pits.length; i++){
+            this.pitPanelArrPlayer1[i].setStoneAmount(this.player1Pits[i]);
+            this.pitPanelArrPlayer2[i].setStoneAmount(this.player2Pits[i]);
+        }
+        this.board.SetStonesAmountInMancalaAPanel(this.player1Mancala);
+        this.board.SetStonesAmountInMancalaBPanel(this.player2Mancala);
+    }
 }
