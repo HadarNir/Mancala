@@ -30,7 +30,6 @@ public class StartGame extends JFrame {
                             if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
                                 currentPitMove = i + 1;
                                 System.out.println(Math.hypot(firstX - e.getX(), firstY - e.getY()));
-                                System.out.println();
                             }
                             firstX += 150;
                         }
