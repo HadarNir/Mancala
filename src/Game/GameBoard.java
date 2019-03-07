@@ -13,9 +13,10 @@ public class GameBoard {
     private PitPanel[] a;
     private MancalaPanel mancalaB;
     private PitPanel[] b;
+    private JFrame frame;
 
     public GameBoard() {
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         JPanel top = new JPanel();
         //Initializing PitPanels and MancalaPanels and attaching it to the model
         mancalaA = new MancalaPanel('1');
@@ -42,11 +43,11 @@ public class GameBoard {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        top.setPreferredSize(new Dimension(800, 100));
+        top.setPreferredSize(new Dimension(1200, 100));
         mainPanel.add(top, BorderLayout.PAGE_START);
         mancalaB.setPreferredSize(new Dimension(150, 500));
         mainPanel.add(mancalaB, BorderLayout.LINE_START);
-        middlePits.setPreferredSize(new Dimension(500, 500));
+        middlePits.setPreferredSize(new Dimension(900, 500));
         mainPanel.add(middlePits, BorderLayout.CENTER);
         mancalaA.setPreferredSize(new Dimension(150, 500));
         mainPanel.add(mancalaA, BorderLayout.LINE_END);
@@ -68,11 +69,15 @@ public class GameBoard {
         return this.b;
     }
 
-    public void SetStonesAmountInMancalaAPanel(int stones){
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void SetStonesAmountInMancalaAPanel(int stones) {
         this.mancalaA.setStoneAmount(stones);
     }
 
-    public void SetStonesAmountInMancalaBPanel(int stones){
+    public void SetStonesAmountInMancalaBPanel(int stones) {
         this.mancalaB.setStoneAmount(stones);
     }
 
