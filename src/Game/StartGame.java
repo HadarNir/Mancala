@@ -9,34 +9,26 @@ public class StartGame {
     private int player1Pits[];
     private int player2Pits[];
     private int zeroArray[];
-    private GameBoard gui;
+
     Scanner in = new Scanner(System.in);
 
     public StartGame() {
         initialBoard();
         printBoard();
-        PitPanel[] a = gui.getA();
-        PitPanel[] b = gui.getB();
         while (!this.gameOver) {
-            this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala, a, b);
-            gui.SetStonesAmountInMancalaAPanel(this.player1Mancala);
+            this.player1Mancala = makeMove(this.player1Pits, this.player2Pits, this.player1Mancala);
             printBoard();
             checkIfGameOver();
             if (!this.gameOver) {
-                this.player2Mancala = makeMove(this.player2Pits, this.player1Pits, this.player2Mancala, b, a);
-                gui.SetStonesAmountInMancalaBPanel(this.player2Mancala);
+                this.player2Mancala = makeMove(this.player2Pits, this.player1Pits, this.player2Mancala);
                 printBoard();
                 checkIfGameOver();
             }
         }
         System.out.println("\n");
         printBoard();
-        for (int i = 0; i < a.length; i++) {
-            a[i].setStoneAmount(0);
-            b[i].setStoneAmount(0);
-        }
-        gui.SetStonesAmountInMancalaAPanel(this.player1Mancala);
-        gui.SetStonesAmountInMancalaBPanel(this.player2Mancala);
+
+
         if (this.player1Mancala > this.player2Mancala)
             System.out.println("\n player 1 won the game \n");
         else
@@ -44,18 +36,13 @@ public class StartGame {
     } //ready for use
 
     public void initialBoard() { // initial the Mancala board
-        gui = new GameBoard();
         zeroArray = new int[6];
         this.player1Pits = new int[6];
         this.player2Pits = new int[6];
         for (int i = 0; i < this.player2Pits.length; i++) {
-            gui.getA()[i].setStoneAmount(5);
-            gui.getB()[i].setStoneAmount(5);
             this.player1Pits[i] = 5;
             this.player2Pits[i] = 5;
         }
-        gui.SetStonesAmountInMancalaAPanel(0);
-        gui.SetStonesAmountInMancalaBPanel(0);
         player1Mancala = 0;
         player2Mancala = 0;
     } //ready for use
@@ -73,7 +60,7 @@ public class StartGame {
         System.out.println(player1Mancala);
     } //ready for use
 
-    public int makeMove(int firstArray[], int secondArray[], int mancala, PitPanel[] a, PitPanel[] b) {
+    public int makeMove(int firstArray[], int secondArray[], int mancala) {
         int j, pit, stones;
         System.out.println("enter number of pit from 1 to 6");
         pit = in.nextInt();
@@ -81,16 +68,13 @@ public class StartGame {
         if (pit > 0 && pit < 7 && firstArray[pit - 1] != 0) {
             stones = firstArray[pit - 1];
             firstArray[pit - 1] = 0;
-            a[pit - 1].setStoneAmount(0);
             while (stones != 0) {
                 if (j < 6) {
                     firstArray[j]++;
-                    a[j].setStoneAmount(firstArray[j]);
                 } else if (j == 6)
                     mancala++;
                 else if (j < 13) {
                     secondArray[j - 7]++;
-                    b[j - 7].setStoneAmount(secondArray[j - 7]);
                 } else {
                     j = 0;
                     continue;
@@ -101,17 +85,15 @@ public class StartGame {
             checkIfGameOver();
             if (j - 1 == 6 && !this.gameOver) {
                 printBoard();
-                mancala = makeMove(firstArray, secondArray, mancala, a, b);
+                mancala = makeMove(firstArray, secondArray, mancala);
             } else if ((j - 1) < 6 && firstArray[j - 1] - 1 == 0) {
                 mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
                 firstArray[j - 1] = 0;
-                a[j - 1].setStoneAmount(0);
                 secondArray[5 - (j - 1)] = 0;
-                b[5 - (j - 1)].setStoneAmount(0);
             }
         } else {
             System.out.println("illegal move");
-            mancala = makeMove(firstArray, secondArray, mancala, a, b);
+            mancala = makeMove(firstArray, secondArray, mancala);
         }
         return mancala;
     } //ready for use
