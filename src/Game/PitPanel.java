@@ -24,9 +24,9 @@ public class PitPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.blue);
-        g2.draw(new RoundRectangle2D.Double(5, 5, GameBoard.PIT_SIZE, GameBoard.PIT_SIZE, 150, 150));
-        g2.setColor(Color.black);
-        g2.drawString(this.stoneAmount + "  pit " + (pitNumber + 1), 10, GameBoard.PIT_SIZE + 20);
+        g2.drawOval(75 - GameBoard.PIT_SIZE/2, 85 - GameBoard.PIT_SIZE/2, GameBoard.PIT_SIZE,GameBoard.PIT_SIZE);
+        g2.setBackground(Color.white);
+        g2.drawString(this.stoneAmount + "  pit " + (pitNumber + 1), 20, GameBoard.PIT_SIZE+ 40);
     }
 
     public void setStoneAmount(int stoneAmount) {

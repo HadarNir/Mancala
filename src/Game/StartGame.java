@@ -23,43 +23,47 @@ public class StartGame extends JFrame {
         initialBoard();
         frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println(e.getX());
-                System.out.println(e.getY());
-                System.out.println();
-                /*
-                for (int i = 0; i < pitPanelArrPlayer1.length; i++) {
-                    if (pitPanelArrPlayer1[i].contains(e.getX(), e.getY())){
-                        currentPitMove = i;
-                    }
-                }
-                System.out.println(currentPitMove);
-                if (!gameOver && currentPitMove != 0) {
+                int firstX = 225, firstY = 447;
+                if (!gameOver) {
                     if (turn == 1) {
-                        player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
-                        printBoard();
-                        updateBoard();
-                        turn++;
+                        for (int i = 0; i < pitPanelArrPlayer1.length; i++) {
+                            if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
+                                currentPitMove = i + 1;
+                                System.out.println(Math.hypot(firstX - e.getX(), firstY - e.getY()));
+                                System.out.println();
+                            }
+                            firstX += 150;
+                        }
+                        if (currentPitMove != 0) {
+                            player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
+                            printBoard();
+                            updateBoard();
+                            turn++;
+                        }
+                        System.out.println("player number " + turn + " turn");
                     } else if (turn == 2) {
-                        player2Mancala = makeMove(player2Pits, player1Pits, player2Mancala);
-                        printBoard();
-                        updateBoard();
-                        turn--;
+                        firstY = 211;
+                        firstX = 225;
+                        for (int i = pitPanelArrPlayer2.length - 1; i >= 0; i--) {
+                            if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
+                                currentPitMove = i + 1;
+                                System.out.println(Math.hypot(firstX - e.getX(), firstY - e.getY()));
+                            }
+                            firstX += 150;
+                        }
+                        if (currentPitMove != 0) {
+                            player2Mancala = makeMove(player2Pits, player1Pits, player2Mancala);
+                            printBoard();
+                            updateBoard();
+                            turn--;
+                        }
+                        System.out.println("player number " + turn + " turn");
                     }
                     checkIfGameOver();
                     currentPitMove = 0;
                 }
-                */
             }
         });
-        if (this.gameOver) {
-            printBoard();
-            System.out.println("\n");
-            updateBoard();
-            if (this.player1Mancala > this.player2Mancala)
-                System.out.println("\n player 1 won the game \n");
-            else
-                System.out.println("\n player 2 won the game \n");
-        }
     } //ready for use
 
     public void initialBoard() { // initial the Mancala board
@@ -80,6 +84,7 @@ public class StartGame extends JFrame {
         this.frame = this.board.getFrame();
         printBoard();
         updateBoard();
+        System.out.println("player number " + this.turn + " turn");
     } //ready for use
 
     public void printBoard() {
@@ -119,8 +124,10 @@ public class StartGame extends JFrame {
             }
             checkIfGameOver();
             if (j - 1 == 6 && !this.gameOver) {
-                printBoard();
-                mancala = makeMove(firstArray, secondArray, mancala);
+                if (this.turn == 1)
+                    turn--;
+                else
+                    turn++;
             } else if ((j - 1) < 6 && firstArray[j - 1] - 1 == 0) {
                 mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
                 firstArray[j - 1] = 0;
@@ -128,7 +135,10 @@ public class StartGame extends JFrame {
             }
         } else {
             System.out.println("illegal move");
-            mancala = makeMove(firstArray, secondArray, mancala);
+            if (this.turn == 1)
+                turn--;
+            else
+                turn++;
         }
         return mancala;
     } //ready for use
@@ -150,6 +160,15 @@ public class StartGame extends JFrame {
             this.gameOver = true;
             this.player1Mancala += Arrays.stream(this.player1Pits).sum();
             this.player1Pits = zeroArray;
+        }
+        if(this.gameOver){
+            printBoard();
+            System.out.println("\n");
+            updateBoard();
+            if (this.player1Mancala > this.player2Mancala)
+                System.out.println("\n player 1 won the game \n");
+            else
+                System.out.println("\n player 2 won the game \n");
         }
     } // ready for use
 

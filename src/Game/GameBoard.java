@@ -8,7 +8,7 @@ public class GameBoard {
     public static final int DEFAULT_HEIGHT = 600;
     public static final int MANCALA_WIDTH = 100;
     public static final int MANCALA_HEIGHT = 400;
-    public static final int PIT_SIZE = 120;
+    public static final int PIT_SIZE = 130;
     private MancalaPanel mancalaA;
     private PitPanel[] a;
     private MancalaPanel mancalaB;
@@ -34,7 +34,6 @@ public class GameBoard {
         //Group the PitPanels together to form two rows
         JPanel middlePits = new JPanel();
         GridLayout middleLayout = new GridLayout(2, 6);
-        middleLayout.setHgap(17);
         middlePits.setLayout(middleLayout);
         for (int i = 5; i >= 0; i--)
             middlePits.add(b[i]);
