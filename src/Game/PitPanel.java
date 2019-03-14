@@ -17,7 +17,7 @@ public class PitPanel extends JPanel {
     public PitPanel(char pitSide, int pitNumber) {
         this.pitSide = pitSide;
         this.pitNumber = pitNumber;
-        this.stones = new ArrayList<JLabel>();
+        this.stones = new ArrayList<>();
         this.imageNames = new String[5];
         imageNames[0] = "stones/blackStone.png";
         imageNames[1] = "stones/blueStone.png";
@@ -27,6 +27,7 @@ public class PitPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+        this.setLayout(null);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.blue);
