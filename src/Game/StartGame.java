@@ -109,21 +109,19 @@ public class StartGame extends JFrame {
             stones = firstArray[pit - 1];
             firstArray[pit - 1] = 0;
             while (stones != 0) {
+                System.out.println(stones + " " + pitPanelFirstArray[pit - 1].getLen());
                 imageLabel = pitPanelFirstArray[pit - 1].lastStoneInserted();
                 if (j < 6) {
                     firstArray[j]++;
                     pitPanelFirstArray[j].addLabel(imageLabel);
-                    pitPanelFirstArray[j].removeAll();
-                    pitPanelFirstArray[j].repaint();
                 } else if (j == 6) {
                     mancala++;
                     mancalaP.addLabel(imageLabel);
                 } else if (j < 13) {
                     secondArray[j - 7]++;
                     pitPanelSecondArray[j - 7].addLabel(imageLabel);
-                    pitPanelSecondArray[j - 7].removeAll();
-                    pitPanelSecondArray[j - 7].repaint();
                 } else {
+                    pitPanelFirstArray[pit - 1].addLabel(imageLabel);
                     j = 0;
                     continue;
                 }
@@ -140,10 +138,16 @@ public class StartGame extends JFrame {
                 mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
                 firstArray[j - 1] = 0;
                 secondArray[5 - (j - 1)] = 0;
-                while (pitPanelFirstArray[j - 1].getStones() != null)
+                while (pitPanelFirstArray[j - 1].getStones() != null) {
                     mancalaP.addLabel(pitPanelFirstArray[j - 1].lastStoneInserted());
-                while (pitPanelSecondArray[j - 1].getStones() != null)
-                    mancalaP.addLabel(pitPanelSecondArray[j - 1].lastStoneInserted());
+                    pitPanelFirstArray[j - 1].removeAll();
+                    pitPanelFirstArray[j - 1].repaint();
+                }
+                while (pitPanelSecondArray[5 - (j - 1)].getStones() != null) {
+                    mancalaP.addLabel(pitPanelSecondArray[5 - (j - 1)].lastStoneInserted());
+                    pitPanelSecondArray[5 - (j - 1)].removeAll();
+                    pitPanelSecondArray[5 - (j - 1)].repaint();
+                }
             }
         } else {
             System.out.println("illegal move");
@@ -175,11 +179,25 @@ public class StartGame extends JFrame {
             this.gameOver = true;
             this.player2Mancala += Arrays.stream(this.player2Pits).sum();
             this.player2Pits = zeroArray;
+            for (int i = 0; i < this.player2Pits.length; i++) {
+                while (pitPanelArrPlayer2[i].getStones() != null) {
+                    board.getMancalaA().addLabel(pitPanelArrPlayer2[i].lastStoneInserted());
+                    pitPanelArrPlayer2[i].removeAll();
+                    pitPanelArrPlayer2[i].repaint();
+                }
+            }
         }
         if (player2BoardEmpty) {
             this.gameOver = true;
             this.player1Mancala += Arrays.stream(this.player1Pits).sum();
             this.player1Pits = zeroArray;
+            for (int i = 0; i < this.player1Pits.length; i++) {
+                while (pitPanelArrPlayer1[i].getStones() != null) {
+                    board.getMancalaB().addLabel(pitPanelArrPlayer1[i].lastStoneInserted());
+                    pitPanelArrPlayer1[i].removeAll();
+                    pitPanelArrPlayer1[i].repaint();
+                }
+            }
         }
         if (this.gameOver) {
             printBoard();
