@@ -34,7 +34,7 @@ public class StartGame extends JFrame {
                             firstX += 150;
                         }
                         if (currentPitMove != 0) {
-                            player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
+                            player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala, pitPanelArrPlayer1, pitPanelArrPlayer2);
                             printBoard();
                             updateBoard();
                             turn++;
@@ -51,7 +51,7 @@ public class StartGame extends JFrame {
                             firstX += 150;
                         }
                         if (currentPitMove != 0) {
-                            player2Mancala = makeMove(player2Pits, player1Pits, player2Mancala);
+                            player2Mancala = makeMove(player2Pits, player1Pits, player2Mancala, pitPanelArrPlayer2, pitPanelArrPlayer1);
                             printBoard();
                             updateBoard();
                             turn--;
@@ -100,7 +100,8 @@ public class StartGame extends JFrame {
         System.out.println("\n");
     } //ready for use
 
-    public int makeMove(int firstArray[], int secondArray[], int mancala) {
+    public int makeMove(int firstArray[], int secondArray[], int mancala, PitPanel pitPanelFirstArray[], PitPanel pitPanelSecondArray[]) {
+        JLabel imageLabel;
         int j, pit, stones;
         pit = this.currentPitMove;
         j = pit;
@@ -108,12 +109,19 @@ public class StartGame extends JFrame {
             stones = firstArray[pit - 1];
             firstArray[pit - 1] = 0;
             while (stones != 0) {
+                imageLabel = pitPanelFirstArray[pit-1].lastStoneInserted();
                 if (j < 6) {
                     firstArray[j]++;
+                    pitPanelFirstArray[j].addLabel(imageLabel);
+                    pitPanelFirstArray[j].removeAll();
+                    pitPanelFirstArray[j].repaint();
                 } else if (j == 6)
                     mancala++;
                 else if (j < 13) {
                     secondArray[j - 7]++;
+                    pitPanelSecondArray[j - 7].addLabel(imageLabel);
+                    pitPanelSecondArray[j - 7].removeAll();
+                    pitPanelSecondArray[j - 7].repaint();
                 } else {
                     j = 0;
                     continue;
@@ -131,6 +139,12 @@ public class StartGame extends JFrame {
                 mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
                 firstArray[j - 1] = 0;
                 secondArray[5 - (j - 1)] = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    pitPanelFirstArray[j - 1].lastStoneInserted();
+                    pitPanelSecondArray[5 - (j - 1)].lastStoneInserted();
+                }
+
             }
         } else {
             System.out.println("illegal move");
@@ -139,6 +153,8 @@ public class StartGame extends JFrame {
             else
                 turn++;
         }
+        pitPanelFirstArray[pit - 1].removeAll();
+        pitPanelFirstArray[pit - 1].repaint();
         return mancala;
     } //ready for use
 
