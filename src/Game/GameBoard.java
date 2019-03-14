@@ -61,37 +61,6 @@ public class GameBoard {
         frame.setVisible(true);
     }
 
-    public void initBoardWithStones() {
-        Random r = new Random();
-        int lowX = 225 - 30;
-        int highX = 225 + 30;
-        int lowY = 447 - 30;
-        int highY = 447 + 30;
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < 5; j++) {
-                int centerX = r.nextInt(highX - lowX) + lowX;
-                int centerY = r.nextInt(highY - lowY) + lowY;
-
-            }
-            lowX += 150;
-            highX += 150;
-        }
-        lowX = 225 - 30;
-        highX = 225 + 30;
-        lowY = 211 - 30;
-        highY = 211 + 30;
-        for (int i = b.length - 1; i >= 0; i--) {
-            for (int j = 0; j < 5; j++) {
-                int centerX = r.nextInt(highX - lowX) + lowX;
-                int centerY = r.nextInt(highY - lowY) + lowY;
-
-            }
-            lowX += 150;
-            highX += 150;
-        }
-
-    }
-
     public PitPanel[] getA() {
         return this.a;
     }

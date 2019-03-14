@@ -67,7 +67,6 @@ public class StartGame extends JFrame {
 
     public void initialBoard() { // initial the Mancala board
         this.board = new GameBoard();
-        board.initBoardWithStones();
         this.currentPitMove = 0;
         this.pitPanelArrPlayer1 = board.getA();
         this.pitPanelArrPlayer2 = board.getB();
