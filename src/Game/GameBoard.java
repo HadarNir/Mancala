@@ -16,6 +16,14 @@ public class GameBoard {
     private PitPanel[] b;
     private JFrame frame;
 
+    public MancalaPanel getMancalaA() {
+        return mancalaA;
+    }
+
+    public MancalaPanel getMancalaB() {
+        return mancalaB;
+    }
+
     public GameBoard() {
         frame = new JFrame();
         JPanel top = new JPanel();

@@ -61,6 +61,10 @@ public class PitPanel extends JPanel {
         this.stoneAmount = stoneAmount;
     }
 
+    public ArrayList<JLabel> getStones() {
+        return stones;
+    }
+
     public JLabel lastStoneInserted() {
         if (!this.stones.isEmpty()) {
             JLabel imageLabel = this.stones.remove(this.stones.size() - 1);
