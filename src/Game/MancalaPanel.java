@@ -27,6 +27,7 @@ public class MancalaPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+        this.setLayout(null);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.blue);
