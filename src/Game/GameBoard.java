@@ -2,7 +2,6 @@ package Game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class GameBoard {
     public static final int DEFAULT_WIDTH = 1200;
@@ -15,14 +14,6 @@ public class GameBoard {
     private MancalaPanel mancalaB;
     private PitPanel[] b;
     private JFrame frame;
-
-    public MancalaPanel getMancalaA() {
-        return mancalaA;
-    }
-
-    public MancalaPanel getMancalaB() {
-        return mancalaB;
-    }
 
     public GameBoard() {
         frame = new JFrame();
@@ -87,6 +78,14 @@ public class GameBoard {
 
     public void SetStonesAmountInMancalaBPanel(int stones) {
         this.mancalaB.setStoneAmount(stones);
+    }
+
+    public MancalaPanel getMancalaA() {
+        return mancalaA;
+    }
+
+    public MancalaPanel getMancalaB() {
+        return mancalaB;
     }
 
 }
