@@ -109,7 +109,6 @@ public class StartGame extends JFrame {
             stones = firstArray[pit - 1];
             firstArray[pit - 1] = 0;
             while (stones != 0) {
-                System.out.println(stones + " " + pitPanelFirstArray[pit - 1].getLen());
                 imageLabel = pitPanelFirstArray[pit - 1].lastStoneInserted();
                 if (j < 6) {
                     firstArray[j]++;

@@ -73,10 +73,6 @@ public class PitPanel extends JPanel {
         return imageLabel;
     }
 
-    public int getLen() {
-        return this.stones.size();
-    }
-
     public void addLabel(JLabel imageLabel) {
         this.stones.add(imageLabel);
         this.removeAll();
