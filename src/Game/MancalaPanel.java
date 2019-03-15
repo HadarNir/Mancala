@@ -19,7 +19,6 @@ public class MancalaPanel extends JPanel {
     private char playerMancala;
     ArrayList<JLabel> stones;
     private String imageNames[];
-    private boolean old = false;
 
     public MancalaPanel(char playerMancala) {
         this.playerMancala = playerMancala;
