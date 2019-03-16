@@ -161,7 +161,7 @@ public class MancalaServer {
         this.player1Mancala = 0;
         this.player2Mancala = 0;
         printBoard();
-        System.out.println("player number " + this.currentPlayer + " turn");
+        System.out.println("player number " + (this.currentPlayer + 1) + " turn");
     } //ready for use
 
     public void printBoard() {
