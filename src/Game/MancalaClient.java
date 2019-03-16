@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MancalaClient  extends JFrame {
+public class MancalaClient extends JFrame {
     private boolean gameOver = false;
     private GameBoard board;
     private PitPanel pitPanelArrPlayer1[];
@@ -15,7 +15,15 @@ public class MancalaClient  extends JFrame {
 
     public MancalaClient() {
         initialBoard();
-        frame.addMouseListener(new MouseAdapter() {
+
+    }
+
+    public void startClient(){
+
+    }
+
+    public void addMouseClick(){
+        this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int firstX = 225, firstY = 447;
                 if (!gameOver) {
@@ -52,7 +60,7 @@ public class MancalaClient  extends JFrame {
                 }
             }
         });
-    } //ready for use
+    }
 
     public void initialBoard() { // initial the Mancala board
         this.board = new GameBoard();
@@ -63,6 +71,5 @@ public class MancalaClient  extends JFrame {
         this.frame = this.board.getFrame();
         System.out.println("player number " + this.turn + " turn");
     } //ready for use
-
 
 }

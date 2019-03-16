@@ -2,7 +2,7 @@ package Game;
 
 import java.util.Arrays;
 
-public class MancalaServer{
+public class MancalaServer {
     private boolean gameOver = false;
     private int player1Mancala;
     private int player2Mancala;
@@ -16,35 +16,9 @@ public class MancalaServer{
 
     }
 
-    public void initialBoard() { // initial the Mancala board
-        this.currentPitMove = 0;
-        this.zeroArray = new int[6];
-        this.player1Pits = new int[6];
-        this.player2Pits = new int[6];
-        this.turn = 1;
-        for (int i = 0; i < this.player2Pits.length; i++) {
-            this.player1Pits[i] = 5;
-            this.player2Pits[i] = 5;
-        }
-        this.player1Mancala = 0;
-        this.player2Mancala = 0;
-        printBoard();
-        System.out.println("player number " + this.turn + " turn");
-    } //ready for use
+    public void startServer(){
 
-    public void printBoard() {
-        System.out.print(player2Mancala);
-        System.out.print('[');
-        for (int i = this.player2Pits.length - 1; i > -1; i--) {
-            System.out.print(this.player2Pits[i]);
-            if (i != 0)
-                System.out.print(", ");
-        }
-        System.out.println(']');
-        System.out.print(Arrays.toString(this.player1Pits));
-        System.out.println(player1Mancala);
-        System.out.println("\n");
-    } //ready for use
+    }
 
     public int makeMove(int firstArray[], int secondArray[], int mancala) {
         int j, pit, stones;
@@ -115,5 +89,35 @@ public class MancalaServer{
                 System.out.println("\n player 2 won the game \n");
         }
     } // ready for use
+
+    public void initialBoard() { // initial the Mancala board
+        this.currentPitMove = 0;
+        this.zeroArray = new int[6];
+        this.player1Pits = new int[6];
+        this.player2Pits = new int[6];
+        this.turn = 1;
+        for (int i = 0; i < this.player2Pits.length; i++) {
+            this.player1Pits[i] = 5;
+            this.player2Pits[i] = 5;
+        }
+        this.player1Mancala = 0;
+        this.player2Mancala = 0;
+        printBoard();
+        System.out.println("player number " + this.turn + " turn");
+    } //ready for use
+
+    public void printBoard() {
+        System.out.print(player2Mancala);
+        System.out.print('[');
+        for (int i = this.player2Pits.length - 1; i > -1; i--) {
+            System.out.print(this.player2Pits[i]);
+            if (i != 0)
+                System.out.print(", ");
+        }
+        System.out.println(']');
+        System.out.print(Arrays.toString(this.player1Pits));
+        System.out.println(player1Mancala);
+        System.out.println("\n");
+    } //ready for use
 
 }
