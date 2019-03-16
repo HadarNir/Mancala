@@ -242,10 +242,11 @@ public class MancalaServer {
         // control thread's execution
         public void run() {
             try {
+                output.format("%d", playerNumber);
+                output.flush();
                 // if player X, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
                     System.out.println("first player connected");
-
                     gameLock.lock(); // lock game to  wait for second player
 
                     try {

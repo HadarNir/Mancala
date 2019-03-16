@@ -17,19 +17,19 @@ public class MancalaClient extends JFrame implements Runnable {
     private PitPanel pitPanelArrPlayer1[];
     private PitPanel pitPanelArrPlayer2[];
     private JFrame frame;
-    private String turn;
+    private int turn;
     private int currentPitMove;
     private Socket connection;
     private Scanner input;
     private Formatter output;
     private String mancalaHost;
-    private String myTurn;
+    private int myTurn;
 
     public MancalaClient(String host) {
         mancalaHost = host;
         initialBoard();
         addMouseClick();
-        turn = "0";
+        turn = 0;
     }
 
     public void startClient() {
@@ -53,27 +53,25 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method startClient
 
     public void run() {
-        myTurn = input.nextLine(); // get player's number
+        myTurn = input.nextInt(); // get player's number
     } // end method run
 
     public void sendPit(int location) {
         // if it is my turn
-        if (turn.equals(myTurn)) {
-            output.format("%d\n", location); // send location to server
+            output.format("%d", location); // send location to server
             output.flush();
-            if(turn.equals("0"))
-                turn = "1";
+            if(turn == 1)
+                turn = 0;
             else
-                turn = "0";
-        } // end if
+                turn = 1;
     }
 
     public void addMouseClick() {
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (!gameOver && myTurn.equals(turn)) {
+                if (!gameOver && myTurn == turn) {
                     int firstX = 225, firstY = 447;
-                    if (myTurn.equals("0")) {
+                    if (myTurn == 0) {
                         for (int i = 0; i < pitPanelArrPlayer1.length; i++) {
                             if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
                                 currentPitMove = i + 1;
@@ -87,7 +85,7 @@ public class MancalaClient extends JFrame implements Runnable {
                         } else
                             System.out.println("illegal move");
                         System.out.println("player number " + turn + " turn");
-                    } else if (myTurn.equals("1")) {
+                    } else if (myTurn == 1) {
                         firstY = 211;
                         firstX = 225;
                         for (int i = pitPanelArrPlayer2.length - 1; i >= 0; i--) {
@@ -115,7 +113,6 @@ public class MancalaClient extends JFrame implements Runnable {
         this.currentPitMove = 0;
         this.pitPanelArrPlayer1 = board.getA();
         this.pitPanelArrPlayer2 = board.getB();
-        this.turn = "0";
         this.frame = this.board.getFrame();
         System.out.println("player number " + this.turn + " turn");
     } //ready for use
