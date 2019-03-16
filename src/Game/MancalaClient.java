@@ -17,11 +17,11 @@ public class MancalaClient extends JFrame {
 
     }
 
-    public void startClient(){
+    public void startClient() {
 
     }
 
-    public void addMouseClick(){
+    public void addMouseClick() {
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int firstX = 225, firstY = 447;
@@ -34,10 +34,12 @@ public class MancalaClient extends JFrame {
                             }
                             firstX += 150;
                         }
-                        if (currentPitMove != 0) {
+                        if (currentPitMove != 0 && pitPanelArrPlayer1[currentPitMove - 1].getStones() != null) {
 
                             turn++;
                         }
+                        else
+                            System.out.println("illegal move");
                         System.out.println("player number " + turn + " turn");
                     } else if (turn == 2) {
                         firstY = 211;
@@ -49,10 +51,12 @@ public class MancalaClient extends JFrame {
                             }
                             firstX += 150;
                         }
-                        if (currentPitMove != 0) {
+                        if (currentPitMove != 0 && pitPanelArrPlayer1[currentPitMove - 1].getStones() != null) {
 
                             turn--;
                         }
+                        else
+                            System.out.println("illegal move");
                         System.out.println("player number " + turn + " turn");
                     }
                     currentPitMove = 0;

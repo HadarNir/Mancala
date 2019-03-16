@@ -87,7 +87,7 @@ public class MancalaServer {
         int j, pit, stones;
         pit = this.currentPitMove;
         j = pit;
-        if (pit > 0 && pit < 7 && firstArray[pit - 1] != 0) {
+        if (pit > 0 && pit < 7) {
             stones = firstArray[pit - 1];
             firstArray[pit - 1] = 0;
             while (stones != 0) {
@@ -115,12 +115,6 @@ public class MancalaServer {
                 firstArray[j - 1] = 0;
                 secondArray[5 - (j - 1)] = 0;
             }
-        } else {
-            System.out.println("illegal move");
-            if (this.currentPlayer == 1)
-                currentPlayer--;
-            else
-                currentPlayer++;
         }
         return mancala;
     }
@@ -183,6 +177,43 @@ public class MancalaServer {
         System.out.println("\n");
     } //ready for use
 
+    public boolean validateAndMove(int location, int player) {
+        // while not current player, must wait for turn
+        while (player != currentPlayer) {
+            gameLock.lock(); // lock game to wait for other player to go
+
+            try {
+                otherPlayerTurn.await(); // wait for player's turn
+            } // end try
+            catch (InterruptedException exception) {
+                exception.printStackTrace();
+            } // end catch
+            finally {
+                gameLock.unlock(); // unlock game after waiting
+            } // end finally
+        } // end while
+
+        // if location not occupied, make move
+        currentPitMove = location;
+        if (currentPlayer == 0) {
+            player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
+        } else {
+            player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
+        }
+        // let new current player know that move occurred
+
+        gameLock.lock(); // lock game to signal other player to go
+
+        try {
+            otherPlayerTurn.signal(); // signal other player to continue
+        } // end try
+        finally {
+            gameLock.unlock(); // unlock game after signaling
+        } // end finally
+
+        return true; // notify player that move was valid
+    }
+
     private class Player implements Runnable {
         private Socket connection; // connection to client
         private Scanner input; // input from client
@@ -205,43 +236,6 @@ public class MancalaServer {
                 System.exit(1);
             } // end catch
         } // end Player constructor
-
-        public boolean validateAndMove(int location, int player) {
-            // while not current player, must wait for turn
-            while (player != currentPlayer) {
-                gameLock.lock(); // lock game to wait for other player to go
-
-                try {
-                    otherPlayerTurn.await(); // wait for player's turn
-                } // end try
-                catch (InterruptedException exception) {
-                    exception.printStackTrace();
-                } // end catch
-                finally {
-                    gameLock.unlock(); // unlock game after waiting
-                } // end finally
-            } // end while
-
-            // if location not occupied, make move
-            currentPitMove = location;
-            if (currentPlayer == 0) {
-                player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
-            } else {
-                player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
-            }
-            // let new current player know that move occurred
-
-            gameLock.lock(); // lock game to signal other player to go
-
-            try {
-                otherPlayerTurn.signal(); // signal other player to continue
-            } // end try
-            finally {
-                gameLock.unlock(); // unlock game after signaling
-            } // end finally
-
-            return true; // notify player that move was valid
-        }
 
         // send message that other player moved
 
