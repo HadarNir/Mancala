@@ -195,7 +195,7 @@ public class MancalaServer {
 
         // if location not occupied, make move
         currentPitMove = location;
-        if (currentPlayer == 0) {
+        if (player == 0) {
             player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
         } else {
             player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
@@ -244,9 +244,7 @@ public class MancalaServer {
             try {
                 // if player X, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
-                    output.format("%s\n%s", "Player X connected",
-                            "Waiting for another player\n");
-                    output.flush(); // flush output
+                    System.out.println("first player connected");
 
                     gameLock.lock(); // lock game to  wait for second player
 
@@ -262,13 +260,9 @@ public class MancalaServer {
                         gameLock.unlock(); // unlock game after second player
                     } // end finally
 
-                    // send message that other player connected
-                    output.format("Other player connected. Your move.\n");
-                    output.flush(); // flush output
                 } // end if
                 else {
-                    output.format("Player O connected, please wait\n");
-                    output.flush(); // flush output
+                    System.out.println("other player connected");
                 } // end else
 
                 // while game not over
@@ -279,15 +273,7 @@ public class MancalaServer {
                         location = input.nextInt(); // get move location
 
                     // check for valid move
-                    if (validateAndMove(location, playerNumber)) {
-                        output.format("Valid move.\n"); // notify client
-                        output.flush(); // flush output
-                    } // end if
-                    else // move was invalid
-                    {
-                        output.format("Invalid move, try again\n");
-                        output.flush(); // flush output
-                    } // end else
+                    validateAndMove(location, playerNumber);
                 } // end while
             } // end try
             finally {
