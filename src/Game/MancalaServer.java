@@ -269,11 +269,11 @@ public class MancalaServer {
                 while (!checkIfGameOver()) {
                     int location = 0; // initialize move location
 
-                    if (input.hasNext())
+                    if (input.hasNext()) {
                         location = input.nextInt(); // get move location
-
-                    // check for valid move
-                    validateAndMove(location, playerNumber);
+                        System.out.println(location);
+                        validateAndMove(location, playerNumber);
+                    }
                 } // end while
             } // end try
             finally {

@@ -28,6 +28,8 @@ public class MancalaClient extends JFrame implements Runnable {
     public MancalaClient(String host) {
         mancalaHost = host;
         initialBoard();
+        addMouseClick();
+        turn = "0";
     }
 
     public void startClient() {
@@ -51,7 +53,7 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method startClient
 
     public void run() {
-        turn = input.nextLine(); // get player's mark (X or O)
+        myTurn = input.nextLine(); // get player's number
     } // end method run
 
     public void sendPit(int location) {
@@ -69,12 +71,13 @@ public class MancalaClient extends JFrame implements Runnable {
     public void addMouseClick() {
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (!gameOver) {
+                if (!gameOver && myTurn.equals(turn)) {
                     int firstX = 225, firstY = 447;
                     if (myTurn.equals("0")) {
                         for (int i = 0; i < pitPanelArrPlayer1.length; i++) {
                             if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
                                 currentPitMove = i + 1;
+                                System.out.println(currentPitMove);
                                 System.out.println(Math.hypot(firstX - e.getX(), firstY - e.getY()));
                             }
                             firstX += 150;
@@ -90,6 +93,7 @@ public class MancalaClient extends JFrame implements Runnable {
                         for (int i = pitPanelArrPlayer2.length - 1; i >= 0; i--) {
                             if (Math.hypot(firstX - e.getX(), firstY - e.getY()) <= 65) {
                                 currentPitMove = i + 1;
+                                System.out.println(currentPitMove);
                                 System.out.println(Math.hypot(firstX - e.getX(), firstY - e.getY()));
                             }
                             firstX += 150;
