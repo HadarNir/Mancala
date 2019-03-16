@@ -39,6 +39,7 @@ public class MancalaServer {
 
     public void startServer() {
         // create ExecutorService with a thread for each player
+        System.out.println("start running server...");
         runGame = Executors.newFixedThreadPool(2);
         gameLock = new ReentrantLock(); // create lock for game
 

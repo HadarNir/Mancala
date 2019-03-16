@@ -100,7 +100,7 @@ public class MancalaClient extends JFrame implements Runnable {
                             sendPit(currentPitMove);
                         } else
                             System.out.println("illegal move");
-                        System.out.println("player number " + turn + 1 + " turn");
+                        System.out.println("player number " + (turn + 1) + " turn");
                     }
                     currentPitMove = 0;
                 }
@@ -114,7 +114,7 @@ public class MancalaClient extends JFrame implements Runnable {
         this.pitPanelArrPlayer1 = board.getA();
         this.pitPanelArrPlayer2 = board.getB();
         this.frame = this.board.getFrame();
-        System.out.println("player number " + this.turn + 1 + " turn");
+        System.out.println("player number " + (this.turn + 1) + " turn");
     } //ready for use
 
 }
