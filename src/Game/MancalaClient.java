@@ -54,10 +54,10 @@ public class MancalaClient extends JFrame implements Runnable {
 
     public void run() {
         myTurn = input.nextInt(); // get player's number
+        System.out.println(myTurn);
     } // end method run
 
     public void sendPit(int location) {
-        // if it is my turn
             output.format("%d", location); // send location to server
             output.flush();
             if(turn == 1)
