@@ -1,8 +1,8 @@
 package Game;
 
-public class MainClass {
+public class MancalaClientTest {
     public static void main(String[] args) {
         //main
-        new StartGame();
+
     }
 }
