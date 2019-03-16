@@ -14,7 +14,6 @@ public class MancalaClient extends JFrame {
     private int currentPitMove;
 
     public MancalaClient() {
-        initialBoard();
 
     }
 
