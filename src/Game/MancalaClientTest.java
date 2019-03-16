@@ -8,5 +8,6 @@ public class MancalaClientTest {
             application = new MancalaClient("127.0.0.1");
         else
             application = new MancalaClient(args[0]);
+        application.startClient();
     }
 }

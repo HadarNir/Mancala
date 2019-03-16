@@ -28,7 +28,6 @@ public class MancalaClient extends JFrame implements Runnable {
     public MancalaClient(String host) {
         mancalaHost = host;
         initialBoard();
-        startClient();
     }
 
     public void startClient() {
