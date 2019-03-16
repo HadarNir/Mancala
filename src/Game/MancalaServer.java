@@ -33,11 +33,11 @@ public class MancalaServer {
 
     public MancalaServer() {
         startServer();
+        players = new Player[2];
+        currentPlayer = firstPlayer;
     }
 
     public void startServer() {
-        players = new Player[2];
-        currentPlayer = firstPlayer;
         // create ExecutorService with a thread for each player
         runGame = Executors.newFixedThreadPool(2);
         gameLock = new ReentrantLock(); // create lock for game
