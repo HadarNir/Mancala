@@ -52,8 +52,9 @@ public class PitPanel extends JPanel {
             }
         } else {
             for (JLabel image : this.stones) {
-                if (image != null)
+                if (image != null) {
                     this.add(image);
+                }
             }
         }
     }

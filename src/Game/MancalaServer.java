@@ -118,13 +118,15 @@ public class MancalaServer {
                 else
                     currentPlayer++;
             } else if ((j - 1) < 6 && firstArray[j - 1] - 1 == 0) {
-                for (int i = 0; i < firstArray[j - 1]; i++) {
+                int n = firstArray[j - 1];
+                for (int i = 0; i < n; i++) {
                     mancala += 1;
                     firstArray[j - 1]--;
                     players[0].stoneMoved(j - 1, 6, 0);
                     players[1].stoneMoved(j - 1, 6, 0);
                 }
-                for (int i = 0; i < secondArray[5 - (j - 1)]; i++) {
+                n = secondArray[5 - (j - 1)];
+                for (int i = 0; i < n; i++) {
                     mancala += 1;
                     secondArray[5 - (j - 1)]--;
                     players[0].stoneMoved(5 - (j - 1), 6, 1);
