@@ -196,12 +196,14 @@ public class MancalaServer {
 
         // if location not occupied, make move
         currentPitMove = location;
-        if (player == 0) {
+        if (currentPlayer == 0) {
             player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
         } else {
             player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
         }
+        currentPlayer = (currentPlayer + 1) % 2; // change player
         // let new current player know that move occurred
+        players[currentPlayer].otherPlayerMoved();
 
         gameLock.lock(); // lock game to signal other player to go
 
@@ -287,6 +289,11 @@ public class MancalaServer {
                 } // end catch
             } // end finally
         } // end method run
+
+        public void otherPlayerMoved() {
+            output.format("Opponent moved\n");
+            output.flush(); // flush output
+        } // end method otherPlayerMoved
 
         // set whether or not thread is suspended
         public void setSuspended(boolean status) {

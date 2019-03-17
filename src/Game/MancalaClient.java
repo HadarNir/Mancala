@@ -55,7 +55,25 @@ public class MancalaClient extends JFrame implements Runnable {
     public void run() {
         if (input.hasNext())
             myTurn = input.nextInt(); // get player's number
+        while (true) {
+            if (input.hasNextLine())
+                processMessage(input.nextLine());
+        } // end while
     } // end method run
+
+    private void processMessage(String message) {
+        // valid move occurred
+        if (message.equals("Valid move.")) {
+
+        } // end if
+        else if (message.equals("Invalid move, try again")) {
+
+        } // end else if
+        else if (message.equals("Opponent moved")) {
+           turn = myTurn; // now this client's turn
+        } // end else if
+    } // end method processMessage
+
 
     public void sendPit(int location) {
         output.format("%d\n", location); // send location to server
@@ -69,7 +87,6 @@ public class MancalaClient extends JFrame implements Runnable {
     public void addMouseClick() {
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println(myTurn);
                 if (!gameOver && myTurn == turn) {
                     int firstX = 225, firstY = 447;
                     if (myTurn == 0) {
