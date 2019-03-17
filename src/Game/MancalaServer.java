@@ -143,8 +143,10 @@ public class MancalaServer {
             System.out.println("\n");
             if (this.player1Mancala > this.player2Mancala)
                 System.out.println("\n player 1 won the game \n");
-            else
+            else if(this.player1Mancala < this.player2Mancala)
                 System.out.println("\n player 2 won the game \n");
+            else
+                System.out.println("\n it's a tie \n");
         }
         return this.gameOver;
     } // ready for use
@@ -161,7 +163,6 @@ public class MancalaServer {
         this.player1Mancala = 0;
         this.player2Mancala = 0;
         printBoard();
-        System.out.println("player number " + (this.currentPlayer + 1) + " turn");
     } //ready for use
 
     public void printBoard() {
@@ -206,7 +207,7 @@ public class MancalaServer {
         currentPlayer = (currentPlayer + 1) % 2; // change player
         // let new current player know that move occurred
         players[currentPlayer].otherPlayerMoved();
-
+        System.out.println("player number " + (this.currentPlayer + 1) + " turn");
         gameLock.lock(); // lock game to signal other player to go
 
         try {
@@ -269,15 +270,15 @@ public class MancalaServer {
                 } // end if
                 else {
                     System.out.println("second player connected");
+                    System.out.println("player number " + (currentPlayer + 1) + " turn");
                 } // end else
 
                 // while game not over
                 while (!checkIfGameOver()) {
-                    int location = 0; // initialize move location
-
+                    int pit = 0; // initialize move location
                     if (input.hasNext()) {
-                        location = input.nextInt(); // get move location
-                        validateAndMove(location, playerNumber); //hadar checked till here
+                        pit = input.nextInt(); // get move location
+                        validateAndMove(pit, playerNumber); //hadar checked till here
                     }
                 } // end while
             } // end try
