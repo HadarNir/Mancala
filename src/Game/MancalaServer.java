@@ -198,8 +198,10 @@ public class MancalaServer {
         currentPitMove = location;
         if (currentPlayer == 0) {
             player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
+            printBoard();
         } else {
             player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
+            printBoard();
         }
         currentPlayer = (currentPlayer + 1) % 2; // change player
         // let new current player know that move occurred
