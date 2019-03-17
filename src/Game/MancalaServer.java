@@ -94,10 +94,16 @@ public class MancalaServer {
             while (stones != 0) {
                 if (j < 6) {
                     firstArray[j]++;
+                    players[0].stoneMoved(pit - 1, j, 0);
+                    players[1].stoneMoved(pit - 1, j, 0);
                 } else if (j == 6) {
                     mancala++;
+                    players[0].stoneMoved(pit - 1, 6, 0);
+                    players[1].stoneMoved(pit - 1, 6, 0);
                 } else if (j < 13) {
                     secondArray[j - 7]++;
+                    players[0].stoneMoved(pit - 1, j - 7, 1);
+                    players[1].stoneMoved(pit - 1, j - 7, 1);
                 } else {
                     j = 0;
                     continue;
@@ -112,11 +118,22 @@ public class MancalaServer {
                 else
                     currentPlayer++;
             } else if ((j - 1) < 6 && firstArray[j - 1] - 1 == 0) {
-                mancala += firstArray[j - 1] + secondArray[5 - (j - 1)];
-                firstArray[j - 1] = 0;
-                secondArray[5 - (j - 1)] = 0;
+                for (int i = 0; i < firstArray[j - 1]; i++) {
+                    mancala += 1;
+                    firstArray[j - 1]--;
+                    players[0].stoneMoved(j - 1, 6, 0);
+                    players[1].stoneMoved(j - 1, 6, 0);
+                }
+                for (int i = 0; i < secondArray[5 - (j - 1)]; i++) {
+                    mancala += 1;
+                    secondArray[5 - (j - 1)]--;
+                    players[0].stoneMoved(5 - (j - 1), 6, 1);
+                    players[1].stoneMoved(5 - (j - 1), 6, 1);
+                }
             }
         }
+        players[0].clearPit(pit);
+        players[1].clearPit(pit);
         return mancala;
     }
 
@@ -143,7 +160,7 @@ public class MancalaServer {
             System.out.println("\n");
             if (this.player1Mancala > this.player2Mancala)
                 System.out.println("\n player 1 won the game \n");
-            else if(this.player1Mancala < this.player2Mancala)
+            else if (this.player1Mancala < this.player2Mancala)
                 System.out.println("\n player 2 won the game \n");
             else
                 System.out.println("\n it's a tie \n");
@@ -297,6 +314,22 @@ public class MancalaServer {
             output.format("Opponent moved\n");
             output.flush(); // flush output
         } // end method otherPlayerMoved
+
+        public void stoneMoved(int fromPit, int toPit, int relativeToPit) {
+            output.format("Stone moved\n");
+            output.format("%d\n", fromPit);
+            output.format("%d\n", toPit);
+            output.format("%d\n", currentPlayer);
+            output.format("%d\n", relativeToPit);
+            output.flush(); // flush output
+        }
+
+        public void clearPit(int pit) {
+            output.format("clear pit\n");
+            output.format("%d\n", pit);
+            output.format("%d\n", currentPlayer);
+            output.flush(); // flush output
+        }
 
         // set whether or not thread is suspended
         public void setSuspended(boolean status) {

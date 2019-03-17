@@ -63,16 +63,66 @@ public class MancalaClient extends JFrame implements Runnable {
 
     private void processMessage(String message) {
         // valid move occurred
-        if (message.equals("Valid move.")) {
-
+        if (message.equals("clear pit")) {
+            int pit = input.nextInt();
+            input.nextLine();
+            int player = input.nextInt();
+            input.nextLine();
+            if(player == 0) {
+                pitPanelArrPlayer1[pit - 1].removeAll();
+                pitPanelArrPlayer1[pit - 1].repaint();
+            }
+            else if(player == 1){
+                pitPanelArrPlayer2[pit - 1].removeAll();
+                pitPanelArrPlayer2[pit - 1].repaint();
+            }
         } // end if
-        else if (message.equals("Invalid move, try again")) {
-
+        else if (message.equals("Stone moved")) {
+            int fromPit = input.nextInt();
+            input.nextLine();
+            int toPit = input.nextInt();
+            input.nextLine();
+            int currentPlayer = input.nextInt();
+            input.nextLine();
+            int relativeToPit = input.nextInt();
+            input.nextLine();
+            System.out.println("from pit " + fromPit + " to pit " + toPit + " curr player " + currentPlayer + " relative pit " + relativeToPit);
+            moveStone(fromPit, toPit, currentPlayer, relativeToPit);
         } // end else if
         else if (message.equals("Opponent moved")) {
-           turn = myTurn; // now this client's turn
+            turn = myTurn; // now this client's turn
         } // end else if
     } // end method processMessage
+
+    public void moveStone(int fromPit, int toPit, int fromPanel, int toPanel) {
+        if (fromPanel == 0) {
+            if (toPit == 6) {
+                if (toPanel == 0) {
+                    board.getMancalaA().addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
+                }
+                else if (toPanel == 1){
+                    board.getMancalaA().addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
+                }
+            } else if (toPanel == 0) {
+                pitPanelArrPlayer1[toPit].addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
+            } else if (toPanel == 1) {
+                pitPanelArrPlayer2[toPit].addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
+            }
+        } else if (fromPanel == 1) {
+            if (toPit == 6) {
+                if (toPanel == 0) {
+                    board.getMancalaB().addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
+                }
+                else if (toPanel == 1){
+                    board.getMancalaB().addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
+                }
+            } else if (toPanel == 0) {
+                pitPanelArrPlayer2[toPit].addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
+            } else if (toPanel == 1) {
+                pitPanelArrPlayer1[toPit].addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
+            }
+        }
+    }
 
 
     public void sendPit(int location) {
@@ -113,7 +163,7 @@ public class MancalaClient extends JFrame implements Runnable {
                             }
                             firstX += 150;
                         }
-                        if (currentPitMove != 0 && pitPanelArrPlayer1[currentPitMove - 1].getStones() != null) {
+                        if (currentPitMove != 0 && pitPanelArrPlayer2[currentPitMove - 1].getStones() != null) {
                             sendPit(currentPitMove);
                         } else
                             System.out.println("illegal move");
