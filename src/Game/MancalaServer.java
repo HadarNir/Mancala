@@ -243,7 +243,7 @@ public class MancalaServer {
         // control thread's execution
         public void run() {
             try {
-                output.format("%d", playerNumber);
+                output.format("%d\n", playerNumber);
                 output.flush();
                 // if player X, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
@@ -264,7 +264,7 @@ public class MancalaServer {
 
                 } // end if
                 else {
-                    System.out.println("other player connected");
+                    System.out.println("second player connected");
                 } // end else
 
                 // while game not over
@@ -273,8 +273,7 @@ public class MancalaServer {
 
                     if (input.hasNext()) {
                         location = input.nextInt(); // get move location
-                        System.out.println(location);
-                        validateAndMove(location, playerNumber);
+                        validateAndMove(location, playerNumber); //hadar checked till here
                     }
                 } // end while
             } // end try

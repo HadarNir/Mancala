@@ -53,22 +53,23 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method startClient
 
     public void run() {
-        myTurn = input.nextInt(); // get player's number
-        System.out.println(myTurn);
+        if (input.hasNext())
+            myTurn = input.nextInt(); // get player's number
     } // end method run
 
     public void sendPit(int location) {
-            output.format("%d", location); // send location to server
-            output.flush();
-            if(turn == 1)
-                turn = 0;
-            else
-                turn = 1;
+        output.format("%d\n", location); // send location to server
+        output.flush();
+        if (turn == 1)
+            turn = 0;
+        else
+            turn = 1;
     }
 
     public void addMouseClick() {
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                System.out.println(myTurn);
                 if (!gameOver && myTurn == turn) {
                     int firstX = 225, firstY = 447;
                     if (myTurn == 0) {
