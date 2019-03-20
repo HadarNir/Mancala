@@ -134,8 +134,6 @@ public class MancalaServer {
                 }
             }
         }
-        players[0].clearPit(pit);
-        players[1].clearPit(pit);
         return mancala;
     }
 
@@ -182,6 +180,7 @@ public class MancalaServer {
         this.player1Mancala = 0;
         this.player2Mancala = 0;
         printBoard();
+
     } //ready for use
 
     public void printBoard() {
@@ -216,13 +215,13 @@ public class MancalaServer {
 
         // if location not occupied, make move
         currentPitMove = location;
-        if (currentPlayer == 0) {
+        if (currentPlayer == 0)
             player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
-            printBoard();
-        } else {
-            player2Mancala = makeMove(player2Pits, player1Pits, player1Mancala);
-            printBoard();
-        }
+        else
+            player2Mancala = makeMove(player2Pits, player1Pits, player2Mancala);
+        printBoard();
+        int sum = Arrays.stream(this.player1Pits).sum() + Arrays.stream(this.player2Pits).sum() + this.player1Mancala + this.player2Mancala;
+        System.out.println("\nthe sum is " + sum + "\n");
         currentPlayer = (currentPlayer + 1) % 2; // change player
         // let new current player know that move occurred
         players[currentPlayer].otherPlayerMoved();
@@ -323,13 +322,6 @@ public class MancalaServer {
             output.format("%d\n", toPit);
             output.format("%d\n", currentPlayer);
             output.format("%d\n", relativeToPit);
-            output.flush(); // flush output
-        }
-
-        public void clearPit(int pit) {
-            output.format("clear pit\n");
-            output.format("%d\n", pit);
-            output.format("%d\n", currentPlayer);
             output.flush(); // flush output
         }
 

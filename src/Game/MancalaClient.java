@@ -63,21 +63,8 @@ public class MancalaClient extends JFrame implements Runnable {
 
     private void processMessage(String message) {
         // valid move occurred
-        if (message.equals("clear pit")) {
-            int pit = input.nextInt();
-            input.nextLine();
-            int player = input.nextInt();
-            input.nextLine();
-            if(player == 0) {
-                pitPanelArrPlayer1[pit - 1].removeAll();
-                pitPanelArrPlayer1[pit - 1].repaint();
-            }
-            else if(player == 1){
-                pitPanelArrPlayer2[pit - 1].removeAll();
-                pitPanelArrPlayer2[pit - 1].repaint();
-            }
-        } // end if
-        else if (message.equals("Stone moved")) {
+         // end if
+        if (message.equals("Stone moved")) {
             int fromPit = input.nextInt();
             input.nextLine();
             int toPit = input.nextInt();
