@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 
-public class PitPanel extends JPanel implements ActionListener {
+public class PitPanel extends JPanel {
     private int stoneAmount;
     private char pitSide;
     private int pitNumber;
     ArrayList<JLabel> stones;
     private String imageNames[];
+    private boolean old = false;
 
 
     public PitPanel(char pitSide, int pitNumber) {
@@ -35,24 +36,25 @@ public class PitPanel extends JPanel implements ActionListener {
         g2.drawOval(75 - GameBoard.PIT_SIZE / 2, 85 - GameBoard.PIT_SIZE / 2, GameBoard.PIT_SIZE, GameBoard.PIT_SIZE);
         g2.setBackground(Color.white);
         g2.drawString(this.stoneAmount + "  pit " + (pitNumber + 1), 20, GameBoard.PIT_SIZE + 40);
-        Random r = new Random();
-        int lowX = 75 - 30;
-        int highX = 75 + 30;
-        int lowY = 85 - 30;
-        int highY = 85 + 30;
-        for (int j = 0; j < 5; j++) {
-            int centerX = r.nextInt(highX - lowX) + lowX;
-            int centerY = r.nextInt(highY - lowY) + lowY;
-            ImageIcon image = new ImageIcon(imageNames[j]);
-            JLabel imageLabel = new JLabel(image);
-            imageLabel.setBounds(centerX, centerY, imageLabel.getPreferredSize().width, imageLabel.getPreferredSize().height);
+        if (this.stones.isEmpty() && !old) {
+            old = true;
+            Random r = new Random();
+            int lowX = 75 - 30;
+            int highX = 75 + 30;
+            int lowY = 85 - 30;
+            int highY = 85 + 30;
+            for (int j = 0; j < 5; j++) {
+                int centerX = r.nextInt(highX - lowX) + lowX;
+                int centerY = r.nextInt(highY - lowY) + lowY;
+                ImageIcon image = new ImageIcon(imageNames[j]);
+                JLabel imageLabel = new JLabel(image);
+                imageLabel.setBounds(centerX, centerY, imageLabel.getPreferredSize().width, imageLabel.getPreferredSize().height);
+                this.add(imageLabel);
+                this.stones.add(imageLabel);
+            }
+        } else {
 
-            this.stones.add(imageLabel);
         }
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        repaint();
     }
 
     public void setStoneAmount(int stoneAmount) {
