@@ -53,7 +53,10 @@ public class PitPanel extends JPanel {
                 this.stones.add(imageLabel);
             }
         } else {
-
+            for (JLabel image : this.stones) {
+                if (image != null)
+                    this.add(image);
+            }
         }
     }
 
@@ -69,12 +72,14 @@ public class PitPanel extends JPanel {
 
     public JLabel lastStoneInserted() {
         JLabel imageLabel = this.stones.remove(this.stones.size() - 1);
-        this.remove(imageLabel);
+        this.removeAll();
+        this.repaint();
         return imageLabel;
     }
 
     public void addLabel(JLabel imageLabel) {
         this.stones.add(imageLabel);
-        this.add(imageLabel);
+        this.removeAll();
+        this.repaint();
     }
 }

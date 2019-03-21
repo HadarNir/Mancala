@@ -53,6 +53,6 @@ public class MancalaPanel extends JPanel {
         int centerY = r.nextInt(highY - lowY) + lowY;
         imageLabel.setBounds(centerX, centerY, imageLabel.getPreferredSize().width, imageLabel.getPreferredSize().height);
         this.stones.add(imageLabel);
-
+        this.repaint();
     }
 }
