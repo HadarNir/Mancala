@@ -49,7 +49,7 @@ public class MancalaServer {
         // condition variable for the other player's turn
         otherPlayerTurn = gameLock.newCondition();
         try {
-            server = new ServerSocket(12345, 2); // set up ServerSocket
+            server = new ServerSocket(12346, 2); // set up ServerSocket
         } // end try
         catch (IOException ioException) {
             ioException.printStackTrace();

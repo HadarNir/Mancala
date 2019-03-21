@@ -37,7 +37,7 @@ public class MancalaClient extends JFrame implements Runnable {
         {
             // make connection to server
             connection = new Socket(
-                    InetAddress.getByName(mancalaHost), 12345);
+                    InetAddress.getByName(mancalaHost), 12346);
 
             // get streams for input and output
             input = new Scanner(connection.getInputStream());

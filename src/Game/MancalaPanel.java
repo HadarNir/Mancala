@@ -41,7 +41,6 @@ public class MancalaPanel extends JPanel {
 
     public void setStoneAmount(int stoneAmount) {
         this.stoneAmount = stoneAmount;
-        this.repaint();
     }
 
     public void addLabel(JLabel imageLabel) {
@@ -54,7 +53,6 @@ public class MancalaPanel extends JPanel {
         int centerY = r.nextInt(highY - lowY) + lowY;
         imageLabel.setBounds(centerX, centerY, imageLabel.getPreferredSize().width, imageLabel.getPreferredSize().height);
         this.stones.add(imageLabel);
-        this.removeAll();
-        this.repaint();
+
     }
 }
