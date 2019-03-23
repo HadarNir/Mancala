@@ -79,7 +79,6 @@ public class PitPanel extends JPanel {
 
     public void addLabel(JLabel imageLabel) {
         this.stones.add(imageLabel);
-        this.removeAll();
         this.repaint();
     }
 }
