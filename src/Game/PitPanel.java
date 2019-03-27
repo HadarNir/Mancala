@@ -66,6 +66,7 @@ public class PitPanel extends JPanel {
     }
 
     public JLabel lastStoneInserted() {
+        this.stoneAmount--;
         JLabel imageLabel = this.stones.remove(this.stones.size() - 1);
         this.removeAll();
         this.repaint();
@@ -73,6 +74,7 @@ public class PitPanel extends JPanel {
     }
 
     public void addLabel(JLabel imageLabel) {
+        this.stoneAmount++;
         this.stones.add(imageLabel);
         this.add(imageLabel);
         this.repaint();

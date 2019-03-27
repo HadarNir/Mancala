@@ -39,6 +39,7 @@ public class MancalaPanel extends JPanel {
     }
 
     public void addLabel(JLabel imageLabel) {
+        this.stoneAmount++;
         Random r = new Random();
         int lowX = 75 - 20;
         int highX = 75 + 10;

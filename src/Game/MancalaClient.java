@@ -166,6 +166,10 @@ public class MancalaClient extends JFrame implements Runnable {
         this.currentPitMove = 0;
         this.pitPanelArrPlayer1 = board.getA();
         this.pitPanelArrPlayer2 = board.getB();
+        for (int i = 0; i < this.pitPanelArrPlayer1.length; i++) {
+            this.pitPanelArrPlayer1[i].setStoneAmount(5);
+            this.pitPanelArrPlayer2[i].setStoneAmount(5);
+        }
         this.frame = this.board.getFrame();
     } //ready for use
 
