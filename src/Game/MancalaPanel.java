@@ -32,11 +32,6 @@ public class MancalaPanel extends JPanel {
         g2.draw(new RoundRectangle2D.Double(25, 0, GameBoard.MANCALA_WIDTH, GameBoard.MANCALA_HEIGHT, 80, 150));
         g2.setColor(Color.BLACK);
         g2.drawString(this.stoneAmount + " Player " + Character.toUpperCase(playerMancala), 50, GameBoard.MANCALA_HEIGHT + 20);
-        if (stones != null)
-            for (JLabel image : this.stones) {
-                if (image != null)
-                    this.add(image);
-            }
     }
 
     public void setStoneAmount(int stoneAmount) {
@@ -53,6 +48,7 @@ public class MancalaPanel extends JPanel {
         int centerY = r.nextInt(highY - lowY) + lowY;
         imageLabel.setBounds(centerX, centerY, imageLabel.getPreferredSize().width, imageLabel.getPreferredSize().height);
         this.stones.add(imageLabel);
+        this.add(imageLabel);
         this.repaint();
     }
 }
