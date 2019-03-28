@@ -150,7 +150,8 @@ public class MancalaServer {
             if(currentPlayer == 0)
                 currentPlayer = 1;
             for (int i = 0; i < this.player2Pits.length; i++) {
-                for (int k = 0; k < this.player2Pits[i]; k++) {
+                int n = this.player2Pits[i];
+                for (int k = 0; k < n; k++) {
                     this.player2Pits[i]--;
                     players[0].stoneMoved(i, 6, 0);
                     players[1].stoneMoved(i, 6, 0);
@@ -164,7 +165,8 @@ public class MancalaServer {
             if(currentPlayer == 1)
                 currentPlayer = 0;
             for (int i = 0; i < this.player1Pits.length; i++) {
-                for (int k = 0; k < this.player1Pits[i]; k++) {
+                int n = this.player1Pits[i];
+                for (int k = 0; k < n; k++) {
                     this.player1Pits[i]--;
                     players[0].stoneMoved(i, 6, 0);
                     players[1].stoneMoved(i, 6, 0);
