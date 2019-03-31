@@ -72,14 +72,6 @@ public class GameBoard {
         return frame;
     }
 
-    public void SetStonesAmountInMancalaAPanel(int stones) {
-        this.mancalaA.setStoneAmount(stones);
-    }
-
-    public void SetStonesAmountInMancalaBPanel(int stones) {
-        this.mancalaB.setStoneAmount(stones);
-    }
-
     public MancalaPanel getMancalaA() {
         return mancalaA;
     }
