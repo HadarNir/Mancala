@@ -34,10 +34,6 @@ public class MancalaPanel extends JPanel {
         g2.drawString(this.stoneAmount + " Player " + Character.toUpperCase(playerMancala), 50, GameBoard.MANCALA_HEIGHT + 20);
     }
 
-    public void setStoneAmount(int stoneAmount) {
-        this.stoneAmount = stoneAmount;
-    }
-
     public void addLabel(JLabel imageLabel) {
         this.stoneAmount++;
         Random r = new Random();
