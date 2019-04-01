@@ -18,7 +18,7 @@ public class MainPage {
         topic.setFont(new Font("Serif", Font.PLAIN, 30));
         JLabel id = new JLabel("please enter your name");
         id.setFont(new Font("Serif", Font.PLAIN, 20));
-        JTextField name = new JTextField();
+        JTextField nameToSend = new JTextField();
         JButton presentButton = new JButton("play");
         // Add components to panel
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -36,7 +36,7 @@ public class MainPage {
         panel.add(id, c);
         c.gridx = 1;
         c.gridy = 1;
-        panel.add(name, c);
+        panel.add(nameToSend, c);
 
 
         c.gridx = 0;
@@ -54,8 +54,8 @@ public class MainPage {
         // Create anonymous classes
         presentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                m.setPlayerName(nameToSend.getText());
                 m.startClient();
-                m.setPlayerName(name.getText());
             }
         });
     }

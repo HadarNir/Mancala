@@ -293,6 +293,10 @@ public class MancalaServer {
                 // if player X, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
                     System.out.println("first player connected");
+                    if(input.hasNextLine()) {
+                        firstPlayerName = input.nextLine();
+                        System.out.println(firstPlayerName);
+                    }
                     gameLock.lock(); // lock game to  wait for second player
 
                     try {
@@ -304,13 +308,22 @@ public class MancalaServer {
                         exception.printStackTrace();
                     } // end catch
                     finally {
-                        gameLock.unlock(); // unlock game after second player
+                        output.format("%s\n",secondPlayerName);
+                        output.flush();
+                        System.out.println(secondPlayerName);
                     } // end finally
+                    gameLock.unlock(); // unlock game after second player
 
                 } // end if
                 else {
                     System.out.println("second player connected");
+                    if(input.hasNextLine()) {
+                        secondPlayerName = input.nextLine();
+                        System.out.println(secondPlayerName);
+                    }
                     System.out.println("player number " + (currentPlayer + 1) + " turn");
+                    output.format("%s\n",firstPlayerName);
+                    output.flush();
                 } // end else
 
                 // while game not over

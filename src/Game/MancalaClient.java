@@ -24,6 +24,7 @@ public class MancalaClient extends JFrame implements Runnable {
     private Formatter output;
     private String mancalaHost;
     private int myTurn;
+    private String myName;
     private String firstPlayerName;
     private String secondPlayerName;
 
@@ -33,11 +34,8 @@ public class MancalaClient extends JFrame implements Runnable {
         turn = 0;
     }
 
-    public void setPlayerName(String name){
-        if(myTurn == 0)
-            this.firstPlayerName = name;
-        else
-            this.secondPlayerName = name;
+    public void setPlayerName(String name) {
+        this.myName = name;
     }
 
     public void startClient() {
@@ -61,8 +59,25 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method startClient
 
     public void run() {
-        if (input.hasNext())
+        output.format("%s\n", this.myName);
+        output.flush();
+        if (input.hasNext()) {
             myTurn = input.nextInt(); // get player's number
+            input.nextLine();
+        }
+        if (input.hasNextLine()) {
+            String name = input.nextLine();
+            System.out.println(name);
+            if (myTurn == 0) {
+                this.secondPlayerName = name;
+                this.firstPlayerName = myName;
+            } else if (myTurn == 1) {
+                this.firstPlayerName = name;
+                this.secondPlayerName = myName;
+            }
+        }
+        initialBoard();
+        addMouseClick();
         while (true) {
             if (input.hasNextLine())
                 processMessage(input.nextLine());
@@ -71,7 +86,7 @@ public class MancalaClient extends JFrame implements Runnable {
 
     private void processMessage(String message) {
         // valid move occurred
-         // end if
+        // end if
         if (message.equals("Stone moved")) {
             int fromPit = input.nextInt();
             input.nextLine();
@@ -94,8 +109,7 @@ public class MancalaClient extends JFrame implements Runnable {
             if (toPit == 6) {
                 if (toPanel == 0) {
                     board.getMancalaA().addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
-                }
-                else if (toPanel == 1){
+                } else if (toPanel == 1) {
                     board.getMancalaA().addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
                 }
             } else if (toPanel == 0) {
@@ -107,8 +121,7 @@ public class MancalaClient extends JFrame implements Runnable {
             if (toPit == 6) {
                 if (toPanel == 0) {
                     board.getMancalaB().addLabel(pitPanelArrPlayer2[fromPit].lastStoneInserted());
-                }
-                else if (toPanel == 1){
+                } else if (toPanel == 1) {
                     board.getMancalaB().addLabel(pitPanelArrPlayer1[fromPit].lastStoneInserted());
                 }
             } else if (toPanel == 0) {
