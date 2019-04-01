@@ -24,12 +24,20 @@ public class MancalaClient extends JFrame implements Runnable {
     private Formatter output;
     private String mancalaHost;
     private int myTurn;
+    private String firstPlayerName;
+    private String secondPlayerName;
 
     public MancalaClient(String host) {
         mancalaHost = host;
-        initialBoard();
-        addMouseClick();
+        MainPage m = new MainPage(this);
         turn = 0;
+    }
+
+    public void setPlayerName(String name){
+        if(myTurn == 0)
+            this.firstPlayerName = name;
+        else
+            this.secondPlayerName = name;
     }
 
     public void startClient() {
@@ -162,7 +170,7 @@ public class MancalaClient extends JFrame implements Runnable {
     }
 
     public void initialBoard() { // initial the Mancala board
-        this.board = new GameBoard();
+        this.board = new GameBoard(this.firstPlayerName, this.secondPlayerName);
         this.currentPitMove = 0;
         this.pitPanelArrPlayer1 = board.getA();
         this.pitPanelArrPlayer2 = board.getB();

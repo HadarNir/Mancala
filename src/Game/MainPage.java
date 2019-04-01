@@ -54,7 +54,8 @@ public class MainPage {
         // Create anonymous classes
         presentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                m.startClient();
+                m.setPlayerName(name.getText());
             }
         });
     }

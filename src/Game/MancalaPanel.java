@@ -16,11 +16,11 @@ import javax.swing.event.ChangeListener;
 
 public class MancalaPanel extends JPanel {
     private int stoneAmount;
-    private char playerMancala;
+    private String playerName;
     ArrayList<JLabel> stones;
 
-    public MancalaPanel(char playerMancala) {
-        this.playerMancala = playerMancala;
+    public MancalaPanel(String playerMancala) {
+        this.playerName = playerMancala;
         this.stones = new ArrayList<JLabel>();
     }
 
@@ -31,7 +31,7 @@ public class MancalaPanel extends JPanel {
         g2.setColor(Color.blue);
         g2.draw(new RoundRectangle2D.Double(25, 0, GameBoard.MANCALA_WIDTH, GameBoard.MANCALA_HEIGHT, 80, 150));
         g2.setColor(Color.BLACK);
-        g2.drawString(this.stoneAmount + " Player " + Character.toUpperCase(playerMancala), 50, GameBoard.MANCALA_HEIGHT + 20);
+        g2.drawString(this.stoneAmount + " " + playerName, 50, GameBoard.MANCALA_HEIGHT + 20);
     }
 
     public void addLabel(JLabel imageLabel) {

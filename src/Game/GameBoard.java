@@ -15,17 +15,17 @@ public class GameBoard {
     private PitPanel[] b;
     private JFrame frame;
 
-    public GameBoard() {
+    public GameBoard(String first, String second) {
         frame = new JFrame();
         JPanel top = new JPanel();
         //Initializing PitPanels and MancalaPanels and attaching it to the model
-        mancalaA = new MancalaPanel('1');
+        mancalaA = new MancalaPanel(first);
         a = new PitPanel[6];
         for (int i = 0; i < 6; i++) {
             a[i] = new PitPanel('1', i);
         }
 
-        mancalaB = new MancalaPanel('2');
+        mancalaB = new MancalaPanel(second);
         b = new PitPanel[6];
         for (int i = 0; i < 6; i++) {
             b[i] = new PitPanel('2', i);

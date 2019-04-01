@@ -29,6 +29,8 @@ public class MancalaServer {
     private Player[] players;
     private final static int firstPlayer = 0;
     private final static int secondPlayer = 1;
+    private String firstPlayerName;
+    private String secondPlayerName;
 
 
     public MancalaServer() {
