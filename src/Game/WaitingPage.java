@@ -22,6 +22,7 @@ public class WaitingPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
     public void closeFrame(){
         frame.dispose();
     }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainPage {
+
     public MainPage(MancalaClient m) {
         //create a frame
         JFrame frame = new JFrame();
