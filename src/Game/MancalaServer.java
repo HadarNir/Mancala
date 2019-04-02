@@ -74,9 +74,7 @@ public class MancalaServer {
                 System.exit(1);
             } // end catch
         } // end for
-
         gameLock.lock(); // lock game to signal player X's thread
-
         try {
             players[firstPlayer].setSuspended(false); // resume player X
             otherPlayerConnected.signal(); // wake up player X's thread
@@ -149,7 +147,7 @@ public class MancalaServer {
         }
         if (player1BoardEmpty) {
             this.player2Mancala += Arrays.stream(this.player2Pits).sum();
-            if(currentPlayer == 0)
+            if (currentPlayer == 0)
                 currentPlayer = 1;
             for (int i = 0; i < this.player2Pits.length; i++) {
                 int n = this.player2Pits[i];
@@ -164,7 +162,7 @@ public class MancalaServer {
         }
         if (player2BoardEmpty) {
             this.player1Mancala += Arrays.stream(this.player1Pits).sum();
-            if(currentPlayer == 1)
+            if (currentPlayer == 1)
                 currentPlayer = 0;
             for (int i = 0; i < this.player1Pits.length; i++) {
                 int n = this.player1Pits[i];
@@ -288,12 +286,10 @@ public class MancalaServer {
         // control thread's execution
         public void run() {
             try {
-                output.format("%d\n", playerNumber);
-                output.flush();
                 // if player X, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
                     System.out.println("first player connected");
-                    if(input.hasNextLine()) {
+                    if (input.hasNextLine()) {
                         firstPlayerName = input.nextLine();
                         System.out.println(firstPlayerName);
                     }
@@ -308,26 +304,29 @@ public class MancalaServer {
                         exception.printStackTrace();
                     } // end catch
                     finally {
-                        output.format("%s\n",secondPlayerName);
-                        output.flush();
-                        System.out.println(secondPlayerName);
+                        gameLock.unlock();
                     } // end finally
-                    gameLock.unlock(); // unlock game after second player
+                    // unlock game after second player
 
                 } // end if
                 else {
                     System.out.println("second player connected");
-                    if(input.hasNextLine()) {
+                    if (input.hasNextLine()) {
                         secondPlayerName = input.nextLine();
                         System.out.println(secondPlayerName);
                     }
                     System.out.println("player number " + (currentPlayer + 1) + " turn");
-                    output.format("%s\n",firstPlayerName);
-                    output.flush();
                 } // end else
-
+                output.format("%d\n", playerNumber);
+                output.flush();
                 // while game not over
+                boolean init = false;
                 while (!checkIfGameOver()) {
+                    if (!init && firstPlayerName != null && secondPlayerName != null) {
+                        init = true;
+                        players[0].sendNames(0);
+                        players[1].sendNames(1);
+                    }
                     int pit = 0; // initialize move location
                     if (input.hasNext()) {
                         pit = input.nextInt(); // get move location
@@ -358,6 +357,18 @@ public class MancalaServer {
             output.format("%d\n", currentPlayer);
             output.format("%d\n", relativeToPit);
             output.flush(); // flush output
+        }
+
+        public void sendNames(int num) {
+            if (num == 0) {
+                output.format("second name is\n");
+                output.format("%s\n", secondPlayerName);
+                output.flush(); // flush output
+            } else if (num == 1) {
+                output.format("first name is\n");
+                output.format("%s\n", firstPlayerName);
+                output.flush(); // flush output
+            }
         }
 
         // set whether or not thread is suspended

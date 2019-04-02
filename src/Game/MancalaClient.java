@@ -65,19 +65,6 @@ public class MancalaClient extends JFrame implements Runnable {
             myTurn = input.nextInt(); // get player's number
             input.nextLine();
         }
-        if (input.hasNextLine()) {
-            String name = input.nextLine();
-            System.out.println(name);
-            if (myTurn == 0) {
-                this.secondPlayerName = name;
-                this.firstPlayerName = myName;
-            } else if (myTurn == 1) {
-                this.firstPlayerName = name;
-                this.secondPlayerName = myName;
-            }
-        }
-        initialBoard();
-        addMouseClick();
         while (true) {
             if (input.hasNextLine())
                 processMessage(input.nextLine());
@@ -102,6 +89,17 @@ public class MancalaClient extends JFrame implements Runnable {
         else if (message.equals("Opponent moved")) {
             turn = myTurn; // now this client's turn
         } // end else if
+        else if (message.equals("first name is")) {
+            firstPlayerName = input.nextLine();
+            secondPlayerName = this.myName;
+        } else if (message.equals("second name is")) {
+            secondPlayerName = input.nextLine();
+            firstPlayerName = this.myName;
+        }
+        if (firstPlayerName != null && secondPlayerName != null) {
+            initialBoard();
+            addMouseClick();
+        }
     } // end method processMessage
 
     public void moveStone(int fromPit, int toPit, int fromPanel, int toPanel) {
