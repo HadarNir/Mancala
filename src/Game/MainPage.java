@@ -55,7 +55,9 @@ public class MainPage {
         presentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m.setPlayerName(nameToSend.getText());
-                m.startClient();
+                frame.dispose();
+                WaitingPage wp = new WaitingPage();
+                m.startClient(wp);
             }
         });
     }

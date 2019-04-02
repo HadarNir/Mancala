@@ -27,6 +27,7 @@ public class MancalaClient extends JFrame implements Runnable {
     private String myName;
     private String firstPlayerName;
     private String secondPlayerName;
+    private WaitingPage wp;
 
     public MancalaClient(String host) {
         mancalaHost = host;
@@ -38,7 +39,8 @@ public class MancalaClient extends JFrame implements Runnable {
         this.myName = name;
     }
 
-    public void startClient() {
+    public void startClient(WaitingPage wp) {
+        this.wp = wp;
         try // connect to server, get streams and start outputThread
         {
             // make connection to server
@@ -96,9 +98,12 @@ public class MancalaClient extends JFrame implements Runnable {
             secondPlayerName = input.nextLine();
             firstPlayerName = this.myName;
         }
-        if (firstPlayerName != null && secondPlayerName != null) {
+        boolean init = false;
+        if (!init && firstPlayerName != null && secondPlayerName != null) {
+            init = true;
             initialBoard();
             addMouseClick();
+            wp.closeFrame();
         }
     } // end method processMessage
 
