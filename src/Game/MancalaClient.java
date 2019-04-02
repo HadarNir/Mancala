@@ -28,6 +28,7 @@ public class MancalaClient extends JFrame implements Runnable {
     private String firstPlayerName;
     private String secondPlayerName;
     private WaitingPage wp;
+    private boolean init = false;
 
     public MancalaClient(String host) {
         mancalaHost = host;
@@ -98,7 +99,6 @@ public class MancalaClient extends JFrame implements Runnable {
             secondPlayerName = input.nextLine();
             firstPlayerName = this.myName;
         }
-        boolean init = false;
         if (!init && firstPlayerName != null && secondPlayerName != null) {
             init = true;
             initialBoard();
