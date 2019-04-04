@@ -74,13 +74,13 @@ public class MancalaServer {
                 System.exit(1);
             } // end catch
         } // end for
-        gameLock.lock(); // lock game to signal player X's thread
+        gameLock.lock(); // lock game to signal first player thread
         try {
-            players[firstPlayer].setSuspended(false); // resume player X
-            otherPlayerConnected.signal(); // wake up player X's thread
+            players[firstPlayer].setSuspended(false); // resume first player
+            otherPlayerConnected.signal(); // wake up first player thread
         } // end try
         finally {
-            gameLock.unlock(); // unlock game after signalling player X
+            gameLock.unlock(); // unlock game after signalling first player
         } // end finally
     } // end method execute
 
@@ -186,7 +186,7 @@ public class MancalaServer {
                 System.out.println("\n it's a tie \n");
         }
         return this.gameOver;
-    } // ready for use
+    }
 
     public void initialBoard() { // initial the Mancala board
         this.currentPitMove = 0;
@@ -201,7 +201,7 @@ public class MancalaServer {
         this.player2Mancala = 0;
         printBoard();
 
-    } //ready for use
+    }
 
     public void printBoard() {
         System.out.print(player2Mancala);
@@ -215,7 +215,7 @@ public class MancalaServer {
         System.out.print(Arrays.toString(this.player1Pits));
         System.out.println(player1Mancala);
         System.out.println("\n");
-    } //ready for use
+    }
 
     public boolean validateAndMove(int location, int player) {
         // while not current player, must wait for turn
@@ -233,7 +233,6 @@ public class MancalaServer {
             } // end finally
         } // end while
 
-        // if location not occupied, make move
         currentPitMove = location;
         if (currentPlayer == 0)
             player1Mancala = makeMove(player1Pits, player2Pits, player1Mancala);
@@ -286,7 +285,7 @@ public class MancalaServer {
         // control thread's execution
         public void run() {
             try {
-                // if player X, wait for another player to arrive
+                // if first player arrived, wait for another player to arrive
                 if (playerNumber == firstPlayer) {
                     System.out.println("first player connected");
                     if (input.hasNextLine()) {
@@ -297,7 +296,7 @@ public class MancalaServer {
 
                     try {
                         while (suspended) {
-                            otherPlayerConnected.await(); // wait for player O
+                            otherPlayerConnected.await(); // wait for second player
                         } // end while
                     } // end try
                     catch (InterruptedException exception) {
@@ -330,7 +329,7 @@ public class MancalaServer {
                     int pit = 0; // initialize move location
                     if (input.hasNext()) {
                         pit = input.nextInt(); // get move location
-                        validateAndMove(pit, playerNumber); //hadar checked till here
+                        validateAndMove(pit, playerNumber);
                     }
                 } // end while
             } // end try

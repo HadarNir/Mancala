@@ -75,8 +75,6 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method run
 
     private void processMessage(String message) {
-        // valid move occurred
-        // end if
         if (message.equals("Stone moved")) {
             int fromPit = input.nextInt();
             input.nextLine();
@@ -88,7 +86,7 @@ public class MancalaClient extends JFrame implements Runnable {
             input.nextLine();
             System.out.println("from pit " + fromPit + " to pit " + toPit + " curr player " + currentPlayer + " relative pit " + relativeToPit);
             moveStone(fromPit, toPit, currentPlayer, relativeToPit);
-        } // end else if
+        } // end if
         else if (message.equals("Opponent moved")) {
             turn = myTurn; // now this client's turn
         } // end else if
@@ -195,6 +193,6 @@ public class MancalaClient extends JFrame implements Runnable {
             this.pitPanelArrPlayer2[i].setStoneAmount(5);
         }
         this.frame = this.board.getFrame();
-    } //ready for use
+    }
 
 }
