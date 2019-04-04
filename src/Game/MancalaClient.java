@@ -69,6 +69,14 @@ public class MancalaClient extends JFrame implements Runnable {
             input.nextLine();
         }
         while (true) {
+            if (!gameOver && firstPlayerName != null && secondPlayerName != null) {
+                if (turn == myTurn)
+                    board.setName(myName);
+                else if (myName.equals(firstPlayerName))
+                    board.setName(secondPlayerName);
+                else
+                    board.setName(firstPlayerName);
+            }
             if (input.hasNextLine())
                 processMessage(input.nextLine());
         } // end while
@@ -89,6 +97,10 @@ public class MancalaClient extends JFrame implements Runnable {
         } // end if
         else if (message.equals("Opponent moved")) {
             turn = myTurn; // now this client's turn
+        } // end else if
+        else if (message.equals("the winner is")) {
+            gameOver = true;
+            board.setOver(input.nextLine());
         } // end else if
         else if (message.equals("first name is")) {
             firstPlayerName = input.nextLine();

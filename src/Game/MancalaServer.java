@@ -178,12 +178,21 @@ public class MancalaServer {
         if (this.gameOver) {
             printBoard();
             System.out.println("\n");
-            if (this.player1Mancala > this.player2Mancala)
+            if (this.player1Mancala > this.player2Mancala) {
                 System.out.println("\n player 1 won the game \n");
-            else if (this.player1Mancala < this.player2Mancala)
+                players[0].whoWon(firstPlayerName + " is the winner");
+                players[1].whoWon(firstPlayerName + " is the winner");
+            }
+            else if (this.player1Mancala < this.player2Mancala) {
                 System.out.println("\n player 2 won the game \n");
-            else
+                players[0].whoWon(secondPlayerName + " is the winner");
+                players[1].whoWon(secondPlayerName + " is the winner");
+            }
+            else {
                 System.out.println("\n it's a tie \n");
+                players[0].whoWon("it's a tie");
+                players[1].whoWon("it's a tie");
+            }
         }
         return this.gameOver;
     }
@@ -368,6 +377,12 @@ public class MancalaServer {
                 output.format("%s\n", firstPlayerName);
                 output.flush(); // flush output
             }
+        }
+
+        public void whoWon(String str){
+            output.format("the winner is\n");
+            output.format("%s\n", str);
+            output.flush(); // flush output
         }
 
         // set whether or not thread is suspended

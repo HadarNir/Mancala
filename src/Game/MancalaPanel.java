@@ -1,9 +1,6 @@
 package Game;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
@@ -29,9 +26,12 @@ public class MancalaPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.blue);
-        g2.draw(new RoundRectangle2D.Double(25, 0, GameBoard.MANCALA_WIDTH, GameBoard.MANCALA_HEIGHT, 80, 150));
+        g2.draw(new RoundRectangle2D.Double(25, 30, GameBoard.MANCALA_WIDTH, GameBoard.MANCALA_HEIGHT, 80, 150));
         g2.setColor(Color.BLACK);
-        g2.drawString(this.stoneAmount + " " + playerName, 50, GameBoard.MANCALA_HEIGHT + 20);
+        g2.setFont(new Font("TimesRoman", Font.PLAIN, 16));
+        g2.drawString(this.stoneAmount + " stones", 50, 400);
+        g2.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g2.drawString(playerName, 50, 25);
     }
 
     public void addLabel(JLabel imageLabel) {

@@ -7,17 +7,21 @@ public class GameBoard {
     public static final int DEFAULT_WIDTH = 1200;
     public static final int DEFAULT_HEIGHT = 600;
     public static final int MANCALA_WIDTH = 100;
-    public static final int MANCALA_HEIGHT = 400;
+    public static final int MANCALA_HEIGHT = 350;
     public static final int PIT_SIZE = 130;
     private MancalaPanel mancalaA;
     private PitPanel[] a;
     private MancalaPanel mancalaB;
     private PitPanel[] b;
     private JFrame frame;
+    private JLabel nowTurn;
 
     public GameBoard(String first, String second) {
         frame = new JFrame();
         JPanel top = new JPanel();
+        nowTurn = new JLabel();
+        nowTurn.setFont(new Font("Serif", Font.PLAIN, 20));
+        top.add(nowTurn);
         //Initializing PitPanels and MancalaPanels and attaching it to the model
         mancalaA = new MancalaPanel(first);
         a = new PitPanel[6];
@@ -58,6 +62,14 @@ public class GameBoard {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
+    }
+
+    public void setName(String n){
+        this.nowTurn.setText("now it's " + n + " turn");
+    }
+
+    public void setOver(String n){
+        this.nowTurn.setText(n);
     }
 
     public PitPanel[] getA() {

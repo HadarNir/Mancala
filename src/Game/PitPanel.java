@@ -33,7 +33,8 @@ public class PitPanel extends JPanel {
         g2.setColor(Color.blue);
         g2.drawOval(75 - GameBoard.PIT_SIZE / 2, 85 - GameBoard.PIT_SIZE / 2, GameBoard.PIT_SIZE, GameBoard.PIT_SIZE);
         g2.setBackground(Color.white);
-        g2.drawString(this.stoneAmount + "  pit " + (pitNumber + 1), 20, GameBoard.PIT_SIZE + 40);
+        g2.drawString("pit " + (pitNumber + 1), 70, 15);
+        g2.drawString(this.stoneAmount + " stones", 50, GameBoard.PIT_SIZE + 40);
         if (this.stones.isEmpty() && !old) {
             old = true;
             Random r = new Random();
