@@ -47,7 +47,7 @@ public class MainPage {
         c.gridy = 2;
         // Add panel to frame
         frame.add(panel);
-        frame.setSize(600, 600);
+        frame.setSize(400, 600);
         frame.setTitle("Mancala");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
