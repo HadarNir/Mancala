@@ -31,9 +31,11 @@ public class MancalaServer {
     private final static int secondPlayer = 1;
     private String firstPlayerName;
     private String secondPlayerName;
+    private int port;
 
 
-    public MancalaServer() {
+    public MancalaServer(int port) {
+        this.port = port;
         startServer();
         players = new Player[2];
         currentPlayer = firstPlayer;
@@ -51,7 +53,7 @@ public class MancalaServer {
         // condition variable for the other player's turn
         otherPlayerTurn = gameLock.newCondition();
         try {
-            server = new ServerSocket(12346, 2); // set up ServerSocket
+            server = new ServerSocket(this.port, 2); // set up ServerSocket
         } // end try
         catch (IOException ioException) {
             ioException.printStackTrace();

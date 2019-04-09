@@ -29,8 +29,10 @@ public class MancalaClient extends JFrame implements Runnable {
     private String secondPlayerName;
     private WaitingPage wp;
     private boolean init = false;
+    private int port;
 
-    public MancalaClient(String host) {
+    public MancalaClient(String host, int port) {
+        this.port = port;
         mancalaHost = host;
         MainPage m = new MainPage(this);
         turn = 0;
@@ -46,7 +48,7 @@ public class MancalaClient extends JFrame implements Runnable {
         {
             // make connection to server
             connection = new Socket(
-                    InetAddress.getByName(mancalaHost), 12346);
+                    InetAddress.getByName(mancalaHost), this.port);
 
             // get streams for input and output
             input = new Scanner(connection.getInputStream());
