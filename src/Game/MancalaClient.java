@@ -32,17 +32,18 @@ public class MancalaClient extends JFrame implements Runnable {
     private int port;
 
     public MancalaClient(String host, int port) {
+        // the constructor which initialize first variables
         this.port = port;
         mancalaHost = host;
         MainPage m = new MainPage(this);
         turn = 0;
     }
 
-    public void setPlayerName(String name) {
+    public void setPlayerName(String name) { //set the name of the player
         this.myName = name;
     }
 
-    public void startClient(WaitingPage wp) {
+    public void startClient(WaitingPage wp) { //start the connection with the server
         this.wp = wp;
         try // connect to server, get streams and start outputThread
         {
@@ -71,7 +72,7 @@ public class MancalaClient extends JFrame implements Runnable {
             input.nextLine();
         }
         while (true) {
-            if (!gameOver && firstPlayerName != null && secondPlayerName != null) {
+            if (!gameOver && firstPlayerName != null && secondPlayerName != null) { //setting players name
                 if (turn == myTurn)
                     board.setName(myName);
                 else if (myName.equals(firstPlayerName))
@@ -79,12 +80,13 @@ public class MancalaClient extends JFrame implements Runnable {
                 else
                     board.setName(firstPlayerName);
             }
-            if (input.hasNextLine())
+            if (input.hasNextLine()) //wait for output from the server
                 processMessage(input.nextLine());
         } // end while
     } // end method run
 
     private void processMessage(String message) {
+        // process each message the client receive from the server
         if (message.equals("Stone moved")) {
             int fromPit = input.nextInt();
             input.nextLine();
@@ -120,6 +122,7 @@ public class MancalaClient extends JFrame implements Runnable {
     } // end method processMessage
 
     public void moveStone(int fromPit, int toPit, int fromPanel, int toPanel) {
+        // move the stone to the right pit (GUI)
         if (fromPanel == 0) {
             if (toPit == 6) {
                 if (toPanel == 0) {
@@ -158,6 +161,7 @@ public class MancalaClient extends JFrame implements Runnable {
     }
 
     public void addMouseClick() {
+        // adding mouse listener for the gui
         this.frame.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (!gameOver && myTurn == turn) {

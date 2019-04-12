@@ -27,6 +27,7 @@ public class PitPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+        // draw a pit with 5 stones inside it
         this.setLayout(null);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -55,16 +56,19 @@ public class PitPanel extends JPanel {
     }
 
     public void setStoneAmount(int stoneAmount) {
+        // set the amount of the stones in the pit
         this.stoneAmount = stoneAmount;
     }
 
     public ArrayList<JLabel> getStones() {
+        // get the stones array list if there are stones inside it
         if (!this.stones.isEmpty())
             return stones;
         else return null;
     }
 
     public JLabel lastStoneInserted() {
+        // get the last stone was inserted into the pit
         this.stoneAmount--;
         JLabel imageLabel = this.stones.remove(this.stones.size() - 1);
         this.removeAll();
@@ -73,6 +77,7 @@ public class PitPanel extends JPanel {
     }
 
     public void addLabel(JLabel imageLabel) {
+        // add a stone to the pit
         this.stoneAmount++;
         this.stones.add(imageLabel);
         this.add(imageLabel);

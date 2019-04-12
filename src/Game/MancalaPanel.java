@@ -17,11 +17,13 @@ public class MancalaPanel extends JPanel {
     ArrayList<JLabel> stones;
 
     public MancalaPanel(String playerMancala) {
+        // the constructor which initialize the name and the gui stones in array
         this.playerName = playerMancala;
         this.stones = new ArrayList<JLabel>();
     }
 
     public void paintComponent(Graphics g) {
+        // drawing the Mancala of one player
         this.setLayout(null);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -35,6 +37,7 @@ public class MancalaPanel extends JPanel {
     }
 
     public void addLabel(JLabel imageLabel) {
+        // update the mancala and add the stone received
         this.stoneAmount++;
         Random r = new Random();
         int lowX = 75 - 20;

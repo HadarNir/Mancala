@@ -35,6 +35,7 @@ public class MancalaServer {
 
 
     public MancalaServer(int port) {
+        // the constructor initialize the port number, array of players and starting to run server
         this.port = port;
         startServer();
         players = new Player[2];
@@ -63,7 +64,7 @@ public class MancalaServer {
 
     // wait for two connections so game can be played
     public void execute() {
-        initialBoard();
+        initialBoard(); // initial the textual board
         // wait for each client to connect
         for (int i = 0; i < players.length; i++) {
             try // wait for connection, create Player, start runnable
@@ -87,6 +88,7 @@ public class MancalaServer {
     } // end method execute
 
     public int makeMove(int firstArray[], int secondArray[], int mancala) {
+        // making a move according to the game rules on the textual board and sending appropriate message to the client
         int j, pit, stones;
         pit = this.currentPitMove;
         j = pit;
@@ -140,6 +142,7 @@ public class MancalaServer {
     }
 
     public boolean checkIfGameOver() {
+        // the function check if the game is over and if it does so making steps to end the game
         boolean player1BoardEmpty = true, player2BoardEmpty = true;
         for (int i = 0; i < this.player1Pits.length; i++) {
             if (this.player1Pits[i] != 0)
@@ -215,6 +218,7 @@ public class MancalaServer {
     }
 
     public void printBoard() {
+        // printing the textual board in the server
         System.out.print(player2Mancala);
         System.out.print('[');
         for (int i = this.player2Pits.length - 1; i > -1; i--) {
@@ -361,6 +365,7 @@ public class MancalaServer {
         } // end method otherPlayerMoved
 
         public void stoneMoved(int fromPit, int toPit, int relativeToPit) {
+            // sending information about a stone which was moved during a move
             output.format("Stone moved\n");
             output.format("%d\n", fromPit);
             output.format("%d\n", toPit);
@@ -370,6 +375,7 @@ public class MancalaServer {
         }
 
         public void sendNames(int num) {
+            // sending for each client the other's client name
             if (num == 0) {
                 output.format("second name is\n");
                 output.format("%s\n", secondPlayerName);
@@ -382,6 +388,7 @@ public class MancalaServer {
         }
 
         public void whoWon(String str){
+            // sending a message to the client about the player who won the game
             output.format("the winner is\n");
             output.format("%s\n", str);
             output.flush(); // flush output

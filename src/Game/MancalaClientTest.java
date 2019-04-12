@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MancalaClientTest {
     public static void main(String[] args) {
         //main
-        String mancalaHost = "127.0.0.1";
+        String mancalaHost = "127.0.0.1"; // set the ip of the client
         Scanner input;
         int port;
         try // connect to server, get streams and start outputThread
@@ -18,7 +18,7 @@ public class MancalaClientTest {
                     InetAddress.getByName(mancalaHost), 12346);
             // get streams for input and output
             input = new Scanner(connection.getInputStream());
-            if (input.hasNext()) {
+            if (input.hasNext()) { //wait for a port to be sent from the server
                 port = input.nextInt();
                 input.nextLine();
                 MancalaClient app = new MancalaClient("127.0.0.1", port);

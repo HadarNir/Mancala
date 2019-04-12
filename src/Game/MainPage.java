@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class MainPage {
 
     public MainPage(MancalaClient m) {
+        //creating the first page the user encounter
         //create a frame
         JFrame frame = new JFrame();
         // Create a panel
@@ -55,6 +56,7 @@ public class MainPage {
         // Create anonymous classes
         presentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //sending the name of the player and creating a waiting page
                 m.setPlayerName(nameToSend.getText());
                 frame.dispose();
                 WaitingPage wp = new WaitingPage();

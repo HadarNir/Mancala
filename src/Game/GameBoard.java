@@ -64,31 +64,31 @@ public class GameBoard {
         frame.setVisible(true);
     }
 
-    public void setName(String n){
+    public void setName(String n){ //setting  the name of the current player who is playing
         this.nowTurn.setText("now it's " + n + " turn");
     }
 
-    public void setOver(String n){
+    public void setOver(String n){ //setting the name of the winner
         this.nowTurn.setText(n);
     }
 
-    public PitPanel[] getA() {
+    public PitPanel[] getA() { //return first pit panel
         return this.a;
     }
 
-    public PitPanel[] getB() {
+    public PitPanel[] getB() { //return second pit panel
         return this.b;
     }
 
-    public JFrame getFrame() {
+    public JFrame getFrame() { //return the frame of the game
         return frame;
     }
 
-    public MancalaPanel getMancalaA() {
+    public MancalaPanel getMancalaA() { //return first mancala
         return mancalaA;
     }
 
-    public MancalaPanel getMancalaB() {
+    public MancalaPanel getMancalaB() { //return second mancala
         return mancalaB;
     }
 

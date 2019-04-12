@@ -6,9 +6,10 @@ import java.awt.*;
 public class WaitingPage {
     private JFrame frame;
     public WaitingPage() {
+        // creating a waiting page for the user which connected
         //create a frame
-        // Create a panel
         frame = new JFrame();
+        // Create a panel
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -24,6 +25,7 @@ public class WaitingPage {
     }
 
     public void closeFrame(){
+        // close the frame after another user has connected
         frame.dispose();
     }
 }

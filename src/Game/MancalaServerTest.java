@@ -13,15 +13,15 @@ public class MancalaServerTest {
         try {
             server = new ServerSocket(12346, 100); // set up ServerSocket
             while (true) {
-                MancalaServer application = new MancalaServer(CurPort);
-                for (int i = 0; i < 2; i++) {
+                MancalaServer application = new MancalaServer(CurPort); //starting a server with the current port
+                for (int i = 0; i < 2; i++) { // send the same port for two users trying to connect
                     try // wait for connection
                     {
-                        Socket socket = server.accept();
+                        Socket socket = server.accept(); // wait for a user to connect
                         try // obtain streams from Socket
                         {
                             Formatter output = new Formatter(socket.getOutputStream());
-                            output.format("%d\n", CurPort);
+                            output.format("%d\n", CurPort); // send to the user the current port
                             output.flush();
                         } // end try
                         catch (IOException ioException) {
@@ -43,8 +43,8 @@ public class MancalaServerTest {
                         System.exit(1);
                     } // end catch
                 } // end for
-                application.execute();
-                CurPort++;
+                application.execute(); // start the game after both users have connected
+                CurPort++; //increase current port
             }
         } // end try
         catch (IOException ioException) {
